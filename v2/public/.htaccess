@@ -1,0 +1,15 @@
+Options -MultiViews
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^www\.surevo\.ai$ [NC]
+RewriteRule ^ https://surevo.ai%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+RewriteRule ^$ index.html [L]
+ErrorDocument 404 /404.html

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="320" viewBox="0 0 180 160" role="img" aria-label="Surevo logo, stacked">
+  <title>Surevo — stacked lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap');
+  .wm{font-family:'DM Sans','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:40px;letter-spacing:-1px}</style>
+  <g transform="translate(58 6) scale(1)">
+    <rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/>
+    <path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/>
+    <circle cx="25" cy="25" r="3" fill="#FFFFFF"/>
+    <path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M25 35 q7 5.5 14 0" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text class="wm" x="90" y="120" text-anchor="middle"><tspan fill="#0B1410">sure</tspan><tspan fill="#0E9F6E">v</tspan><tspan fill="#0B1410">o</tspan></text>
+</svg>

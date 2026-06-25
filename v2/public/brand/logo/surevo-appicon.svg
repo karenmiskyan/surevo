@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Surevo app icon">
+  <title>Surevo — app icon</title>
+  <rect width="512" height="512" rx="114" fill="#0E9F6E"/>
+  <g transform="translate(96 104) scale(4.8)">
+    <rect x="6" y="8" width="52" height="38" rx="14" fill="#FFFFFF"/>
+    <path d="M18 46 L18 57 L30 46 Z" fill="#FFFFFF"/>
+    <circle cx="25" cy="25" r="3" fill="#0E9F6E"/>
+    <path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#0E9F6E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M25 35 q7 5.5 14 0" fill="none" stroke="#0E9F6E" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surevo — Brand Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&family=Assistant:wght@400;600;700&family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#0E9F6E; --green-bright:#16B98A; --pine:#07231B; --forest:#0C3A2A;
+    --mint:#E9F4EE; --mint-2:#F2F8F4; --vmint:#4FE3B0; --honey:#FFC857;
+    --ink:#0B1410; --slate:#5A6B63; --mist:#9AA8A1; --paper:#F6F9F7; --line:#E2EDE7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  section{padding:52px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+  h2{font-size:30px;font-weight:700;letter-spacing:-.02em;margin:8px 0 10px}
+  h3{font-size:17px;font-weight:700;margin:0 0 6px}
+  p{font-size:15.5px;color:#2C3A33;max-width:680px}
+  .muted{color:var(--slate);font-size:14px}
+  .mono{font-family:'DM Mono',monospace}
+
+  /* COVER */
+  .cover{background:var(--pine);border-radius:0;padding:0;margin:0;border:none}
+  .cover-inner{max-width:980px;margin:0 auto;padding:80px 24px 70px;color:#fff}
+  .cover .eyebrow{color:var(--vmint)}
+  .cover h1{font-size:54px;font-weight:700;letter-spacing:-.03em;margin:14px 0 12px;line-height:1.04}
+  .cover p{color:#BFE9D8;font-size:18px;max-width:620px}
+  .cover .lock{margin-bottom:30px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+  .stage{border-radius:14px;display:flex;align-items:center;justify-content:center;min-height:130px;padding:18px}
+
+  .wm{font-weight:700;letter-spacing:-.03em;display:inline-flex;align-items:center}
+
+  /* color swatches */
+  .sw{border-radius:13px;overflow:hidden;border:1px solid var(--line)}
+  .sw .top{height:84px}
+  .sw .meta{padding:10px 12px;background:#fff}
+  .sw .nm{font-size:13.5px;font-weight:700}
+  .sw .hx{font-size:12px;color:var(--slate)}
+  .sw .role{font-size:11.5px;color:var(--mist);margin-top:2px}
+
+  /* type scale */
+  .scale .row{display:flex;align-items:baseline;gap:16px;border-top:1px solid var(--line);padding:12px 0}
+  .scale .row:first-child{border-top:none}
+  .scale .lab{width:120px;flex:0 0 auto;font-size:12px;color:var(--slate);font-family:'DM Mono'}
+
+  .do .stage{background:var(--mint)}
+  .dont .stage{background:#FCEEEC}
+  .tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .tag{font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--mint);color:var(--forest)}
+  .x{color:#C0392B;font-weight:700}.c{color:var(--green);font-weight:700}
+
+  .he{direction:rtl;text-align:right;font-family:'Assistant'}
+  .clearspace{position:relative}
+
+  ul.assets{list-style:none;margin-top:8px}
+  ul.assets li{font-size:14px;padding:8px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}
+  ul.assets li:first-child{border-top:none}
+  ul.assets .path{font-family:'DM Mono';font-size:12.5px;color:var(--slate)}
+
+  .chatdemo{background:#E7EDE9;border-radius:18px;padding:16px;max-width:340px}
+  .cbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .cbar .av{width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center}
+  .bub{max-width:82%;padding:9px 13px;border-radius:15px;font-size:13.5px;margin-bottom:7px;direction:rtl;text-align:right;font-family:'Assistant'}
+  .bub.them{background:#fff;margin-left:auto;border-bottom-right-radius:5px}
+  .bub.us{background:var(--green);color:#fff;border-bottom-left-radius:5px}
+  @media(max-width:720px){.grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}.cover h1{font-size:38px}}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="lock">
+      <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="8" width="52" height="38" rx="14" fill="#16B98A"/><path d="M18 46 L18 57 L30 46 Z" fill="#16B98A"/><circle cx="25" cy="25" r="3" fill="#07231B"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#07231B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#07231B" stroke-width="3" stroke-linecap="round"/></svg>
+    </div>
+    <div class="eyebrow">Brand book · v1.0</div>
+    <h1>Surevo</h1>
+    <p>The WhatsApp-native AI sales agent for Israeli WooCommerce stores. Meet Vero — the agent with a face your customers trust.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ESSENCE -->
+  <section>
+    <div class="eyebrow">01 · Essence</div>
+    <h2>What Surevo is</h2>
+    <p>Surevo gives every online store a tireless seller that lives where Israeli customers already are — WhatsApp. Not a cold FAQ bot, but a warm, capable agent that recommends, reassures, and closes. The brand has to feel <b>human, local, and certain</b>. That's why we gave it a character, not just a logo.</p>
+    <div class="tagrow">
+      <span class="tag">Human</span><span class="tag">Local · Israeli</span><span class="tag">Certain — “sure”</span><span class="tag">WhatsApp-native</span><span class="tag">Warm, not robotic</span>
+    </div>
+  </section>
+
+  <!-- THE MARK -->
+  <section>
+    <div class="eyebrow">02 · The mark</div>
+    <h2>Meet Vero</h2>
+    <p>Vero is a speech bubble with a face — the product itself, drawn. The bubble says “conversation.” The face makes it someone you trust. And the right eye is always a <b>checkmark</b>: the “v” in <span class="mono">sure<b style="color:var(--green)">v</b>o</span>, the WhatsApp double-tick, the closed deal. It's the one detail that must never change.</p>
+    <div class="grid2" style="margin-top:22px">
+      <div class="card"><div class="stage" style="background:var(--mint)">
+        <svg width="200" height="60" viewBox="0 0 240 72" aria-hidden="true"><g transform="translate(6 8) scale(0.875)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><circle cx="25" cy="25" r="3" fill="#fff"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g></svg>
+      </div><h3 style="margin-top:16px">Primary lockup</h3><p class="muted">Icon + wordmark, horizontal. The default everywhere there's room.</p></div>
+      <div class="card"><div class="stage" style="background:var(--pine)">
+        <svg width="200" height="60" viewBox="0 0 240 72" aria-hidden="true"><g transform="translate(6 8) scale(0.875)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#16B98A"/><path d="M18 46 L18 57 L30 46 Z" fill="#16B98A"/><circle cx="25" cy="25" r="3" fill="#07231B"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#07231B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#07231B" stroke-width="3" stroke-linecap="round"/></g><text x="70" y="48" font-family="DM Sans, sans-serif" font-weight="700" font-size="38" letter-spacing="-1"><tspan fill="#fff">sure</tspan><tspan fill="#4FE3B0">v</tspan><tspan fill="#fff">o</tspan></text></svg>
+      </div><h3 style="margin-top:16px">Reverse</h3><p class="muted">For dark and emerald backgrounds.</p></div>
+    </div>
+  </section>
+
+  <!-- VARIATIONS -->
+  <section>
+    <div class="eyebrow">03 · Variations</div>
+    <h2>One mark, every format</h2>
+    <p>Built to stay sharp from a billboard to a 16px favicon.</p>
+    <div class="grid4" style="margin-top:20px">
+      <div class="card" style="padding:14px;text-align:center"><div class="stage" style="background:var(--mint);min-height:100px">
+        <svg width="76" height="60" viewBox="0 0 180 160" aria-hidden="true"><g transform="translate(58 6)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><circle cx="25" cy="25" r="3" fill="#fff"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g><text x="90" y="120" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="40" letter-spacing="-1"><tspan fill="#0B1410">sure</tspan><tspan fill="#0E9F6E">v</tspan><tspan fill="#0B1410">o</tspan></text></svg>
+      </div><div class="muted" style="margin-top:8px">Stacked</div></div>
+      <div class="card" style="padding:14px;text-align:center"><div class="stage" style="background:var(--mint);min-height:100px">
+        <svg width="60" height="60" viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><circle cx="25" cy="25" r="3" fill="#fff"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+      </div><div class="muted" style="margin-top:8px">Icon</div></div>
+      <div class="card" style="padding:14px;text-align:center"><div class="stage" style="background:#fff;min-height:100px;border:1px solid var(--line)">
+        <svg width="72" height="72" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="114" fill="#0E9F6E"/><g transform="translate(96 104) scale(4.8)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#fff"/><path d="M18 46 L18 57 L30 46 Z" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#0E9F6E"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#0E9F6E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#0E9F6E" stroke-width="3" stroke-linecap="round"/></g></svg>
+      </div><div class="muted" style="margin-top:8px">App icon</div></div>
+      <div class="card" style="padding:14px;text-align:center"><div class="stage" style="background:var(--mint);min-height:100px">
+        <svg width="150" height="64" viewBox="0 0 220 100" aria-hidden="true"><g transform="translate(150 6) scale(0.9)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><circle cx="25" cy="25" r="3" fill="#fff"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g><text x="135" y="44" text-anchor="end" font-family="DM Sans, sans-serif" font-weight="700" font-size="36" letter-spacing="-1"><tspan fill="#0B1410">sure</tspan><tspan fill="#0E9F6E">v</tspan><tspan fill="#0B1410">o</tspan></text><text x="205" y="78" text-anchor="end" direction="rtl" font-family="Assistant, sans-serif" font-weight="600" font-size="16" fill="#5A6B63">המוכר שלך בוואטסאפ. תמיד ער.</text></svg>
+      </div><div class="muted" style="margin-top:8px">Hebrew lockup</div></div>
+    </div>
+  </section>
+
+  <!-- EXPRESSIONS -->
+  <section>
+    <div class="eyebrow">04 · Expression system</div>
+    <h2>Vero reacts</h2>
+    <p>A face beats a static logo because it can respond. Use these states across chat, loading, success screens, empty states, and ads. Same character, different mood — the checkmark eye stays.</p>
+    <div class="card" style="margin-top:18px"><div class="stage" style="background:var(--mint)">
+      <svg width="540" height="104" viewBox="0 0 336 64" aria-hidden="true">
+        <g><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><circle cx="25" cy="25" r="3" fill="#fff"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
+        <g transform="translate(68 0)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><circle cx="25" cy="24" r="3" fill="#fff"/><path d="M35 24 L38.3 27.3 L45 19" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="32" cy="36" rx="4" ry="3.2" fill="#fff"/><path d="M50 22 q3 2 0 4" fill="none" stroke="#9FE6CC" stroke-width="2" stroke-linecap="round"/><path d="M53 20 q5 3 0 8" fill="none" stroke="#9FE6CC" stroke-width="2" stroke-linecap="round"/></g>
+        <g transform="translate(136 0)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><path d="M21 25 q4 -4 8 0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 6 14 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
+        <g transform="translate(204 0)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><path d="M21 26 q4 -5 8 0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M35 26 q4 -5 8 0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M23 34 q9 9 18 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
+        <g transform="translate(272 0)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><circle cx="24" cy="24" r="3" fill="#fff"/><circle cx="40" cy="24" r="3" fill="#fff"/><path d="M25 37 h14" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="47" cy="14" r="1.7" fill="#9FE6CC"/><circle cx="52" cy="11" r="1.2" fill="#9FE6CC"/></g>
+      </svg>
+    </div>
+    <div class="grid4" style="margin-top:14px;text-align:center">
+      <div class="muted">Idle — avatar</div><div class="muted">Talking — live chat</div><div class="muted">Wink — deal done</div><div class="muted">Win — sale closed</div><div class="muted">Thinking — loading</div>
+    </div></div>
+  </section>
+
+  <!-- CLEAR SPACE & MISUSE -->
+  <section>
+    <div class="eyebrow">05 · Rules</div>
+    <h2>Clear space, size & misuse</h2>
+    <div class="grid2" style="margin-top:18px">
+      <div class="card">
+        <h3>Clear space &amp; minimum size</h3>
+        <p class="muted">Keep clear space equal to the height of the bubble's tail on all sides. Never place the logo smaller than: icon 24px, horizontal lockup 96px wide.</p>
+        <div class="stage" style="background:var(--mint);margin-top:12px">
+          <svg width="180" height="80" viewBox="0 0 180 80" aria-hidden="true"><rect x="20" y="14" width="140" height="52" fill="none" stroke="#0E9F6E" stroke-dasharray="4 4" stroke-width="1"/><g transform="translate(34 26) scale(0.5)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/><path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/><circle cx="25" cy="25" r="3" fill="#fff"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g><text x="68" y="50" font-family="DM Sans, sans-serif" font-weight="700" font-size="26" letter-spacing="-1"><tspan fill="#0B1410">sure</tspan><tspan fill="#0E9F6E">v</tspan><tspan fill="#0B1410">o</tspan></text></svg>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Never</h3>
+        <ul style="list-style:none;font-size:14.5px;color:#2C3A33;margin-top:6px">
+          <li style="padding:5px 0"><span class="x">✕</span> Recolour outside the palette</li>
+          <li style="padding:5px 0"><span class="x">✕</span> Stretch, rotate, or skew the bubble</li>
+          <li style="padding:5px 0"><span class="x">✕</span> Swap the checkmark eye for a dot</li>
+          <li style="padding:5px 0"><span class="x">✕</span> Add shadows, gradients, or outlines</li>
+          <li style="padding:5px 0"><span class="x">✕</span> Place the colour logo on a busy photo (use reverse)</li>
+          <li style="padding:5px 0"><span class="x">✕</span> Re-typeset the wordmark in another font</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section>
+    <div class="eyebrow">06 · Colour</div>
+    <h2>Colour system</h2>
+    <p>Emerald carries the brand: green signals growth, money, and “go,” and lives naturally beside WhatsApp. Deep pine anchors it; mint opens it up; honey is the rare moment of celebration (a sale closed).</p>
+    <h3 style="margin-top:24px">Core</h3>
+    <div class="grid4" style="margin-top:10px">
+      <div class="sw"><div class="top" style="background:#0E9F6E"></div><div class="meta"><div class="nm">Surevo Green</div><div class="hx mono">#0E9F6E</div><div class="role">Primary · brand</div></div></div>
+      <div class="sw"><div class="top" style="background:#16B98A"></div><div class="meta"><div class="nm">Bright Green</div><div class="hx mono">#16B98A</div><div class="role">Dark-mode · hover</div></div></div>
+      <div class="sw"><div class="top" style="background:#07231B"></div><div class="meta"><div class="nm">Deep Pine</div><div class="hx mono">#07231B</div><div class="role">Dark bg · text</div></div></div>
+      <div class="sw"><div class="top" style="background:#4FE3B0"></div><div class="meta"><div class="nm">V-Mint</div><div class="hx mono">#4FE3B0</div><div class="role">Accent on dark</div></div></div>
+    </div>
+    <h3 style="margin-top:22px">Support &amp; neutrals</h3>
+    <div class="grid4" style="margin-top:10px">
+      <div class="sw"><div class="top" style="background:#FFC857"></div><div class="meta"><div class="nm">Honey</div><div class="hx mono">#FFC857</div><div class="role">Celebrate · sparingly</div></div></div>
+      <div class="sw"><div class="top" style="background:#E9F4EE"></div><div class="meta"><div class="nm">Mint</div><div class="hx mono">#E9F4EE</div><div class="role">Light surface</div></div></div>
+      <div class="sw"><div class="top" style="background:#0B1410"></div><div class="meta"><div class="nm">Ink</div><div class="hx mono">#0B1410</div><div class="role">Body text</div></div></div>
+      <div class="sw"><div class="top" style="background:#5A6B63"></div><div class="meta"><div class="nm">Slate</div><div class="hx mono">#5A6B63</div><div class="role">Secondary text</div></div></div>
+    </div>
+    <h3 style="margin-top:22px">Semantic</h3>
+    <div class="grid4" style="margin-top:10px">
+      <div class="sw"><div class="top" style="background:#0E9F6E"></div><div class="meta"><div class="nm">Success</div><div class="hx mono">#0E9F6E</div></div></div>
+      <div class="sw"><div class="top" style="background:#F59E0B"></div><div class="meta"><div class="nm">Warning</div><div class="hx mono">#F59E0B</div></div></div>
+      <div class="sw"><div class="top" style="background:#E24B4A"></div><div class="meta"><div class="nm">Danger</div><div class="hx mono">#E24B4A</div></div></div>
+      <div class="sw"><div class="top" style="background:#2563EB"></div><div class="meta"><div class="nm">Info</div><div class="hx mono">#2563EB</div></div></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section>
+    <div class="eyebrow">07 · Typography</div>
+    <h2>Type system</h2>
+    <p><b>DM Sans</b> is the Latin voice — warm, humanist, friendly without being childish. <b>Assistant</b> is the Hebrew companion (with Heebo as the display alternative); both are free, Google-hosted, and built for screens and RTL.</p>
+    <div class="grid2" style="margin-top:20px">
+      <div class="card">
+        <div class="muted mono">Latin · DM Sans</div>
+        <div style="font-size:40px;font-weight:700;letter-spacing:-.02em;margin-top:6px">Sells like a local.</div>
+        <div style="font-size:16px;margin-top:6px;color:#2C3A33">The quick brown fox — 0123456789</div>
+      </div>
+      <div class="card he">
+        <div class="muted mono" style="direction:ltr;text-align:left">Hebrew · Assistant</div>
+        <div style="font-size:36px;font-weight:700;margin-top:6px">מוכר כמו בן אדם.</div>
+        <div style="font-size:16px;margin-top:6px;color:#2C3A33">המוכר שלך בוואטסאפ — ‎0123456789</div>
+      </div>
+    </div>
+    <div class="card scale" style="margin-top:16px">
+      <div class="row"><div class="lab">Display / 48</div><div style="font-size:34px;font-weight:700;letter-spacing:-.02em">Every chat, a sale</div></div>
+      <div class="row"><div class="lab">H2 / 30 · 700</div><div style="font-size:24px;font-weight:700">Heading</div></div>
+      <div class="row"><div class="lab">Body / 16 · 400</div><div style="font-size:16px">Body copy stays at 16px with generous line height for easy reading on mobile.</div></div>
+      <div class="row"><div class="lab">Caption / 12</div><div style="font-size:12px;color:var(--slate)">Captions and labels</div></div>
+    </div>
+  </section>
+
+  <!-- VOICE -->
+  <section>
+    <div class="eyebrow">08 · Voice</div>
+    <h2>How Vero talks</h2>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card do"><h3 style="color:var(--green)">We are</h3>
+        <p class="muted">Warm, plain-spoken, Israeli. Confident without pressure. We help first, sell second. We speak the customer's everyday Hebrew, not stiff translation.</p>
+        <div class="tagrow"><span class="tag">חם</span><span class="tag">ישיר</span><span class="tag">בטוח</span><span class="tag">מקומי</span></div>
+      </div>
+      <div class="card dont"><h3 style="color:#C0392B">We are not</h3>
+        <p class="muted">Pushy, robotic, or corporate. We don't over-promise, don't spam, and never sound like a translated foreign tool. No hype, no jargon.</p>
+        <div class="tagrow"><span class="tag" style="background:#FCEEEC;color:#9A2B22">לא לוחץ</span><span class="tag" style="background:#FCEEEC;color:#9A2B22">לא רובוטי</span><span class="tag" style="background:#FCEEEC;color:#9A2B22">לא מתורגם</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IN USE -->
+  <section>
+    <div class="eyebrow">09 · In use</div>
+    <h2>Where Vero lives</h2>
+    <div class="grid2" style="margin-top:18px;align-items:start">
+      <div class="chatdemo">
+        <div class="cbar"><div class="av"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="10" width="52" height="44" rx="15" fill="#fff" opacity="0"/><rect x="6" y="9" width="52" height="40" rx="14" fill="#0E9F6E"/><circle cx="25" cy="27" r="3.2" fill="#fff"/><path d="M35 27 L38.3 30.3 L45 22" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 37 q7 5.5 14 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></div><div><div style="font-weight:700;font-size:14px">Surevo · ורו</div><div style="font-size:11.5px;color:#3FA66B">● מקליד…</div></div></div>
+        <div class="bub them">יש לכם את זה במידה L? 🤔</div>
+        <div class="bub us">כן! במלאי, ומשלוח חינם מעל ₪200. אשמור לך אחד? ✓✓</div>
+        <div class="bub them">מעולה, קח 🙌</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="stage" style="background:var(--pine);min-height:150px">
+          <svg width="96" height="96" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="114" fill="#0E9F6E"/><g transform="translate(96 104) scale(4.8)"><rect x="6" y="8" width="52" height="38" rx="14" fill="#fff"/><path d="M18 46 L18 57 L30 46 Z" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#0E9F6E"/><path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#0E9F6E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 35 q7 5.5 14 0" fill="none" stroke="#0E9F6E" stroke-width="3" stroke-linecap="round"/></g></svg>
+        </div>
+        <p class="muted" style="margin:14px auto 0">App icon &amp; WhatsApp profile picture</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSETS -->
+  <section style="border-bottom:none">
+    <div class="eyebrow">10 · Assets</div>
+    <h2>Files in this kit</h2>
+    <p class="muted">All vector (SVG). Wordmark lockups are set in DM Sans — convert text to outlines before sending to a printer.</p>
+    <ul class="assets" style="margin-top:14px">
+      <li><span>Vero icon · colour</span><span class="path">brand/logo/surevo-vero-color.svg</span></li>
+      <li><span>Vero icon · reverse</span><span class="path">brand/logo/surevo-vero-reverse.svg</span></li>
+      <li><span>App icon (512px tile)</span><span class="path">brand/logo/surevo-appicon.svg</span></li>
+      <li><span>Horizontal lockup</span><span class="path">brand/logo/surevo-horizontal.svg</span></li>
+      <li><span>Horizontal · reverse</span><span class="path">brand/logo/surevo-horizontal-reverse.svg</span></li>
+      <li><span>Stacked lockup</span><span class="path">brand/logo/surevo-stacked.svg</span></li>
+      <li><span>Hebrew lockup</span><span class="path">brand/logo/surevo-hebrew.svg</span></li>
+      <li><span>Expression set (5 states)</span><span class="path">brand/logo/surevo-vero-expressions.svg</span></li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

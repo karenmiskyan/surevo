@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07231B">
+  <meta name="description" content="Surevo - סוכן המכירות החכם שמוכר עבור החנות שלך בוואטסאפ ובאתר, 24/7.">
+  <title>Surevo | המוכר הדיגיטלי שלך. תמיד ער.</title>
+  <link rel="icon" href="../brand/logo/surevo-appicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Heebo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">דלג לתוכן</a>
+
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5m6 6-6-6 6-6"/></symbol>
+    <symbol id="i-arrow-diagonal" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 7 8 5-8 5V7Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m21 3-7.7 18-3.8-7.2L3 10.5 21 3Z"/><path d="m9.5 13.8 4-4"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8.4 8.4 0 0 1-3.5-.8L4 20l1.7-4A7.8 7.8 0 0 1 4 11.5 7.5 7.5 0 0 1 12 4a7.5 7.5 0 0 1 8 7.5Z"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="m13 2-9 13h8l-1 7 9-13h-8l1-7Z"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/><path d="M10 20h.01M18 20h.01"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="m7 15 4-4 3 2 5-6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="m8 12 8-8M14 3l7 7M7 13l4 4M5 11l8 8-2 2a3 3 0 0 1-4 0l-4-4a3 3 0 0 1 0-4l2-2Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20a4 4 0 0 0-8 0M12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 18a3 3 0 0 0-3-3M17 5a3 3 0 0 1 0 6M4 18a3 3 0 0 1 3-3M7 5a3 3 0 0 0 0 6"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M20.5 11.7a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.4-4.4a8.4 8.4 0 1 1 15.6-4.4Z"/><path d="M9 8.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.5.6c.7 1.3 1.7 2.3 3.1 2.9l.6-.7c.2-.2.4-.3.7-.2l1.6.8c.3.1.4.3.4.6v.4c0 .4-.1.7-.4.9-.4.3-1 .5-1.5.5-1.1 0-2.9-.8-4.7-2.4-1.6-1.5-2.6-3.3-2.7-4.5 0-.5.1-.9.3-1.2Z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.9-4M4 5v5h5M4 13a8 8 0 0 0 14.9 4M20 19v-5h-5"/></symbol>
+  </svg>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="shell nav-shell">
+      <a class="logo" href="/v2" aria-label="Surevo ראשי">
+        <img class="logo-reverse" src="../brand/logo/surevo-horizontal-reverse.svg" alt="Surevo">
+        <img class="logo-color" src="../brand/logo/surevo-horizontal.svg" alt="Surevo">
+      </a>
+      <nav class="desktop-nav" aria-label="ניווט ראשי">
+        <a href="/v2/agent">הסוכן</a>
+        <a href="/v2/how-it-works">איך זה עובד</a>
+        <a href="/v2/pricing">תמחור</a>
+        <a href="/v2/results">תוצאות</a>
+        <a href="/v2/agencies">לסוכנויות</a>
+        <a href="/v2/blog">בלוג</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="language-switch" type="button" aria-label="Switch language">EN</button>
+        <a class="button button-sm button-light magnetic" href="/v2/audit">
+          <span>קבל אבחון חינם</span>
+          <svg><use href="#i-arrow"/></svg>
+        </a>
+        <button class="menu-button" id="menuButton" type="button" aria-label="פתח תפריט" aria-expanded="false">
+          <svg><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-top">
+      <img src="../brand/logo/surevo-horizontal-reverse.svg" alt="Surevo">
+      <button class="icon-button" id="menuClose" type="button" aria-label="סגור תפריט"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <nav aria-label="ניווט למובייל">
+      <a href="/v2/agent"><span>01</span> הסוכן</a>
+      <a href="/v2/how-it-works"><span>02</span> איך זה עובד</a>
+      <a href="/v2/pricing"><span>03</span> תמחור</a>
+      <a href="/v2/results"><span>04</span> תוצאות</a>
+      <a href="/v2/agencies"><span>05</span> לסוכנויות</a>
+      <a href="/v2/blog"><span>06</span> בלוג</a>
+    </nav>
+    <div class="mobile-menu-bottom">
+      <div class="vero-peek"><div class="vero-avatar" data-expression="wink"></div></div>
+      <p>החנות שלך יכולה למכור גם כשאתה כבר לא מול המסך.</p>
+      <a class="button button-primary button-block" href="/v2/audit">קבל אבחון מכירות חינם <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-aurora aurora-one"></div>
+      <div class="hero-aurora aurora-two"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="shell hero-shell">
+        <div class="hero-copy">
+          <div class="live-pill reveal">
+            <span class="live-dot"></span>
+            <span>המוכר הדיגיטלי שלך עובד עכשיו</span>
+          </div>
+          <h1 class="reveal reveal-delay-1">לא עוד צ׳אטבוט.<br><em>מוכר</em> שלא מפספס לקוח.</h1>
+          <p class="hero-lead reveal reveal-delay-2">Surevo נכנס לאתר ולוואטסאפ שלך, לומד את הקטלוג, עונה בעברית טבעית ומוביל כל שיחה עד להזמנה.</p>
+          <div class="hero-actions reveal reveal-delay-3">
+            <a class="button button-primary button-lg magnetic" href="/v2/audit">
+              <span>קבל אבחון מכירות חינם</span>
+              <svg><use href="#i-arrow"/></svg>
+            </a>
+            <button class="button button-ghost button-lg" type="button" data-open-chat>
+              <span class="play"><svg><use href="#i-play"/></svg></span>
+              <span>דבר עם ורו עכשיו</span>
+            </button>
+          </div>
+          <div class="hero-proof reveal reveal-delay-4">
+            <div class="proof-faces">
+              <span>מ</span><span>ר</span><span>י</span>
+            </div>
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>התקנה וניהול מלאים על ידינו</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-stage reveal reveal-delay-2" id="heroStage">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="floating-card floating-card-top">
+            <span class="float-icon"><svg><use href="#i-cart"/></svg></span>
+            <div><b>הזמנה חדשה</b><small>₪349 · לפני 12 שניות</small></div>
+          </div>
+          <div class="floating-card floating-card-bottom">
+            <span class="float-icon honey"><svg><use href="#i-chart"/></svg></span>
+            <div><b>+23% המרות</b><small>מאז שוורו הצטרף לחנות</small></div>
+          </div>
+          <div class="phone-wrap" id="parallaxPhone">
+            <div class="phone-glow"></div>
+            <div class="phone">
+              <div class="phone-top"><span></span><i></i></div>
+              <div class="chat-app">
+                <div class="chat-head">
+                  <button class="tiny-back" type="button" tabindex="-1"><svg><use href="#i-chevron"/></svg></button>
+                  <div class="chat-contact">
+                    <div class="avatar-ring"><div class="vero-avatar vero-sm" data-expression="talking"></div></div>
+                    <div><b>Surevo · ורו</b><small><span class="online-dot"></span> פעיל עכשיו</small></div>
+                  </div>
+                  <span class="mini-dots">•••</span>
+                </div>
+                <div class="chat-date">היום</div>
+                <div class="phone-messages" id="heroMessages" aria-live="polite"></div>
+                <div class="typing-bubble hero-typing" id="heroTyping" hidden><span></span><span></span><span></span></div>
+                <div class="chat-input-fake"><span>הקלדת הודעה</span><svg><use href="#i-send"/></svg></div>
+              </div>
+            </div>
+          </div>
+          <div class="vero-float">
+            <div class="vero-avatar vero-lg" data-expression="talking"></div>
+            <span>● מקליד…</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-bottom">
+        <div class="shell hero-bottom-inner">
+          <span>מתחבר למה שכבר עובד אצלך</span>
+          <div class="hero-mini-logos"><b>Woo</b><b>WhatsApp</b><b>iCount</b><b>Cardcom</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="logo-section" aria-label="אינטגרציות">
+      <div class="marquee">
+        <div class="marquee-track">
+          <div class="marquee-set"><span>WooCommerce</span><i></i><span>WhatsApp</span><i></i><span>iCount</span><i></i><span>Greeninvoice</span><i></i><span>Cardcom</span><i></i><span>Hyp</span><i></i><span>Pelecard</span><i></i><span>Tranzilla</span><i></i></div>
+          <div class="marquee-set" aria-hidden="true"><span>WooCommerce</span><i></i><span>WhatsApp</span><i></i><span>iCount</span><i></i><span>Greeninvoice</span><i></i><span>Cardcom</span><i></i><span>Hyp</span><i></i><span>Pelecard</span><i></i><span>Tranzilla</span><i></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-paper" id="why">
+      <div class="shell">
+        <div class="section-intro reveal">
+          <p class="eyebrow">הבעיה אינה הטראפיק. היא השיחה שלא קרתה.</p>
+          <h2>כל לקוח שלא קיבל תשובה,<br><em>הלך לחנות הבאה.</em></h2>
+          <p>ורו הופך את הרגעים הקטנים שבהם הכסף בורח למכירות אמיתיות, בלי להוסיף עוד משימות לצוות.</p>
+        </div>
+        <div class="metrics-grid">
+          <article class="metric-card reveal">
+            <strong><span class="counter" data-count="24">0</span><small>/7</small></strong>
+            <p>מענה מיידי, גם כשהחנות סגורה</p>
+          </article>
+          <article class="metric-card reveal reveal-delay-1">
+            <strong><span class="counter" data-count="23">0</span><small>%+</small></strong>
+            <p>יותר המרות בשיחות עם ורו</p>
+          </article>
+          <article class="metric-card reveal reveal-delay-2">
+            <strong><span class="counter" data-count="2">0</span><small> דק׳</small></strong>
+            <p>כדי לקבל אבחון ראשוני לחנות</p>
+          </article>
+          <article class="metric-card metric-dark reveal reveal-delay-3">
+            <img src="../brand/logo/surevo-vero-reverse.svg" alt="">
+            <p>נבנה בישראל.<br><b>מדבר כמו לקוח ישראלי.</b></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section demo-section" id="how">
+      <div class="shell demo-layout">
+        <div class="demo-copy reveal">
+          <p class="eyebrow">לא מצגת. שיחת מכירה אמיתית.</p>
+          <h2>תראה איך ורו<br><em>סוגר את העסקה.</em></h2>
+          <p>לחץ על תרחיש. ורו ינהל שיחה כמו איש מכירות טוב: יבין מה הלקוח צריך, יפתור התנגדות ויקדם להזמנה.</p>
+          <div class="scenario-list" role="tablist" aria-label="תרחישי שיחה">
+            <button class="scenario active" type="button" role="tab" aria-selected="true" data-scenario="recommend">
+              <span>01</span><div><b>המלצה על מוצר</b><small>התאמה לפי צורך ותקציב</small></div>
+            </button>
+            <button class="scenario" type="button" role="tab" aria-selected="false" data-scenario="objection">
+              <span>02</span><div><b>התנגדות למחיר</b><small>ערך, ביטחון וסגירה</small></div>
+            </button>
+            <button class="scenario" type="button" role="tab" aria-selected="false" data-scenario="recovery">
+              <span>03</span><div><b>הצלת סל נטוש</b><small>פנייה עדינה בזמן הנכון</small></div>
+            </button>
+          </div>
+        </div>
+        <div class="sales-console reveal reveal-delay-2">
+          <div class="console-top">
+            <div class="console-session">
+              <span class="console-kicker">CONVERSATION INTELLIGENCE</span>
+              <div class="console-session-line">
+                <span class="console-live"><i></i> LIVE</span>
+                <b>שיחה פעילה · #SRV-2048</b>
+              </div>
+            </div>
+            <div class="console-vero"><span>ורו מנתח כוונה</span><div class="vero-avatar vero-xs" data-expression="talking"></div></div>
+          </div>
+          <div class="console-body">
+            <div class="console-signals" aria-hidden="true">
+              <span><i></i> WhatsApp</span>
+              <span>תגובה 0.8 שנ׳</span>
+              <span>עברית טבעית</span>
+            </div>
+            <div class="console-messages" id="consoleMessages" aria-live="polite"></div>
+            <div class="typing-bubble console-typing" id="consoleTyping" hidden><span></span><span></span><span></span></div>
+          </div>
+          <div class="console-footer">
+            <div class="console-footer-copy"><small>כוונת רכישה</small><b>גבוהה</b></div>
+            <div class="console-intent">
+              <div class="console-intent-meta"><span>מוכנה לסגירה</span><em>+18%</em></div>
+              <div class="intent-bar"><span></span></div>
+            </div>
+            <strong>92<small>%</small></strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-mint">
+      <div class="shell">
+        <div class="section-intro centered reveal">
+          <p class="eyebrow">שירות מנוהל. לא עוד כלי שצריך ללמוד.</p>
+          <h2>אתה מוכר. <em>אנחנו מטפלים בכל השאר.</em></h2>
+          <p>מההתקנה ועד השיפור החודשי, Surevo מגיע מוכן לעבוד עם החנות שלך.</p>
+        </div>
+        <div class="bento-grid">
+          <article class="bento-card bento-large reveal tilt-card">
+            <div class="card-icon"><svg><use href="#i-plug"/></svg></div>
+            <div>
+              <span class="card-num">01</span>
+              <h3>מתחברים לחנות שלך</h3>
+              <p>קטלוג, מלאי, תשלומים וחשבוניות. WooCommerce והמערכות הישראליות שלך במקום אחד.</p>
+            </div>
+            <div class="integration-cloud">
+              <span>Woo</span><span>iCount</span><span>Cardcom</span><span>Hyp</span><span>WhatsApp</span>
+            </div>
+          </article>
+          <article class="bento-card reveal reveal-delay-1 tilt-card">
+            <div class="card-icon"><svg><use href="#i-message"/></svg></div>
+            <span class="card-num">02</span>
+            <h3>לומדים איך אתה מוכר</h3>
+            <p>ורו מדבר בעברית שלך, מכיר את המוצרים ויודע מתי להמליץ ומתי לתת רגע לחשוב.</p>
+          </article>
+          <article class="bento-card bento-dark reveal reveal-delay-2 tilt-card">
+            <div class="card-icon"><svg><use href="#i-zap"/></svg></div>
+            <span class="card-num">03</span>
+            <h3>עולים לאוויר תוך 24 שעות</h3>
+            <p>אנחנו מתקינים, בודקים וממשיכים לשפר. אתה רואה את ההכנסות, לא את ההגדרות.</p>
+            <div class="pulse-line"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="bento-card bento-wide reveal tilt-card">
+            <div>
+              <div class="card-icon"><svg><use href="#i-chart"/></svg></div>
+              <span class="card-num">04</span>
+              <h3>כל חודש נהיה מדויק יותר</h3>
+              <p>דוח ביצועים, תובנות מהשיחות ואופטימיזציה אנושית. ורו לומד מה סוגר אצלך יותר עסקאות.</p>
+            </div>
+            <div class="mini-chart">
+              <div class="chart-label"><span>מכירות משיחות</span><b>+23%</b></div>
+              <svg viewBox="0 0 300 110" aria-label="גרף צמיחה">
+                <defs><linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#16B98A" stop-opacity=".38"/><stop offset="1" stop-color="#16B98A" stop-opacity="0"/></linearGradient></defs>
+                <path class="chart-area" d="M0 92 C30 86 39 88 62 74 C84 60 101 72 122 57 C149 38 169 51 192 35 C216 19 245 26 300 4 L300 110 L0 110Z"/>
+                <path class="chart-path" d="M0 92 C30 86 39 88 62 74 C84 60 101 72 122 57 C149 38 169 51 192 35 C216 19 245 26 300 4"/>
+              </svg>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section result-section" id="results">
+      <div class="result-aurora"></div>
+      <div class="shell">
+        <div class="result-heading reveal">
+          <p class="eyebrow eyebrow-mint">המספרים שחשובים באמת</p>
+          <h2>לא עוד הודעות.<br><em>יותר הכנסות.</em></h2>
+        </div>
+        <div class="case-card reveal reveal-delay-1">
+          <div class="case-story">
+            <div class="quote-mark">״</div>
+            <blockquote>לפני Surevo היו לנו עשרות שאלות שנשארו עד הבוקר. היום לקוחות מקבלים תשובה מיד, ואנחנו רואים את זה בהזמנות.</blockquote>
+            <div class="person">
+              <div class="person-avatar">מ</div>
+              <div><b>מאיה לוי</b><small>בעלים · Studio North, תל אביב</small></div>
+            </div>
+          </div>
+          <div class="case-numbers">
+            <div><strong>₪14,280</strong><span>מכירות שהוחזרו</span></div>
+            <div><strong>+23%</strong><span>עלייה בהמרה</span></div>
+            <div><strong>31</strong><span>סלים שניצלו החודש</span></div>
+          </div>
+        </div>
+        <div class="guarantee reveal reveal-delay-2">
+          <div class="guarantee-badge"><svg><use href="#i-shield"/></svg></div>
+          <div>
+            <h3>30 יום. בלי סיכון.</h3>
+            <p>אם Surevo לא מחזיר לפחות את דמי השירות החודשיים בחודש הראשון, נחזיר את עלות ההקמה.</p>
+          </div>
+          <a class="text-link" href="/v2/audit">בדוק אם החנות שלך מתאימה <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section audit-section" id="audit">
+      <div class="shell audit-layout">
+        <div class="audit-copy reveal">
+          <p class="eyebrow">אבחון מכירות חינם</p>
+          <h2>כמה כסף נשאר<br><em>אצלך בעגלה?</em></h2>
+          <p>שלח לנו את החנות. בתוך 24 שעות נחזור אליך בוואטסאפ עם 3 הזדמנויות מכירה שאפשר לתקן מיד.</p>
+          <ul class="audit-list">
+            <li><svg><use href="#i-check"/></svg><span>בלי התחייבות ובלי כרטיס אשראי</span></li>
+            <li><svg><use href="#i-check"/></svg><span>מותאם לחנות ולמוצרים שלך</span></li>
+            <li><svg><use href="#i-check"/></svg><span>כולל הדגמה חיה של ורו</span></li>
+          </ul>
+          <div class="audit-note">
+            <div class="vero-avatar vero-sm" data-expression="wink"></div>
+            <span>2 דקות למלא. תשובה אנושית תוך 24 שעות.</span>
+          </div>
+        </div>
+        <div class="audit-card reveal reveal-delay-2">
+          <form id="auditForm" novalidate>
+            <div class="form-head">
+              <span class="form-step">01</span>
+              <div><h3>בוא נכיר את החנות</h3><p>כמה פרטים קצרים ומתחילים.</p></div>
+            </div>
+            <label class="field">
+              <span>כתובת החנות</span>
+              <input type="url" name="store" placeholder="mystore.co.il" required>
+              <small>לדוגמה: https://mystore.co.il</small>
+            </label>
+            <div class="form-row">
+              <label class="field">
+                <span>שם פרטי</span>
+                <input type="text" name="name" placeholder="איך קוראים לך?" required>
+              </label>
+              <label class="field">
+                <span>וואטסאפ</span>
+                <div class="phone-field"><b dir="ltr">+972</b><input type="tel" name="phone" placeholder="50-000-0000" required></div>
+              </label>
+            </div>
+            <label class="field">
+              <span>מחזור מכירות חודשי</span>
+              <select name="revenue" required>
+                <option value="">בחר טווח</option>
+                <option>עד ₪100,000</option>
+                <option>₪100,000 - ₪300,000</option>
+                <option>₪300,000 - ₪1,000,000</option>
+                <option>מעל ₪1,000,000</option>
+              </select>
+            </label>
+            <button class="button button-primary button-lg button-block" type="submit">
+              <span>שלח לי אבחון חינם</span>
+              <svg><use href="#i-arrow"/></svg>
+            </button>
+            <p class="form-trust"><svg><use href="#i-shield"/></svg> הפרטים נשארים בינינו. בלי ספאם.</p>
+          </form>
+          <div class="form-success" id="formSuccess" hidden>
+            <div class="success-vero"><div class="vero-avatar vero-xl" data-expression="win"></div></div>
+            <span class="success-chip">הבקשה התקבלה</span>
+            <h3>מעולה, אנחנו על זה.</h3>
+            <p>נעבור על החנות ונחזור אליך בוואטסאפ בתוך 24 שעות עם אבחון ראשוני.</p>
+            <button class="text-link" id="resetForm" type="button">שלח חנות נוספת <svg><use href="#i-refresh"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq">
+      <div class="shell faq-layout">
+        <div class="section-intro reveal">
+          <p class="eyebrow">שאלות טובות. תשובות קצרות.</p>
+          <h2>לפני שמתחילים.</h2>
+          <p>עוד משהו לא ברור? ורו מחכה בצד שמאל למטה ויענה בשמחה.</p>
+        </div>
+        <div class="faq-list reveal reveal-delay-1">
+          <article class="faq-item open">
+            <button type="button" aria-expanded="true"><span>זה עוד צ׳אטבוט שאני צריך להגדיר לבד?</span><svg><use href="#i-chevron"/></svg></button>
+            <div class="faq-answer" aria-hidden="false"><p>לא. Surevo הוא שירות מנוהל. אנחנו מחברים את הקטלוג, המלאי, התשלומים והחשבוניות, מאמנים את ורו לפי החנות שלך וממשיכים לשפר אותו בכל חודש.</p></div>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false"><span>זה עובד גם באתר וגם בוואטסאפ?</span><svg><use href="#i-chevron"/></svg></button>
+            <div class="faq-answer" aria-hidden="true"><p>כן. אותה שפת מכירה, אותו ידע על המוצרים ואותו שירות - בתוך האתר ובוואטסאפ של החנות.</p></div>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false"><span>ורו יודע לדבר עברית טבעית?</span><svg><use href="#i-chevron"/></svg></button>
+            <div class="faq-answer" aria-hidden="true"><p>זה בדיוק היתרון המקומי שלנו. ורו נבנה לשיחות מסחר בישראל: עברית יומיומית, מחירים בשקלים, משלוחים, תשלומים והקצב שבו לקוחות כאן באמת מדברים.</p></div>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false"><span>כמה זמן לוקח לעלות לאוויר?</span><svg><use href="#i-chevron"/></svg></button>
+            <div class="faq-answer" aria-hidden="true"><p>ברוב החנויות אפשר להיות באוויר תוך 24 שעות מרגע שקיבלנו גישה וחיברנו את המערכות הדרושות.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-aurora"></div>
+    <div class="shell footer-shell">
+      <div class="footer-cta reveal">
+        <div>
+          <p class="eyebrow eyebrow-mint">החנות פתוחה. גם עכשיו.</p>
+          <h2>תן לכל שיחה<br><em>להפוך למכירה.</em></h2>
+        </div>
+        <a class="button button-primary button-lg magnetic" href="/v2/audit">קבל אבחון מכירות חינם <svg><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-brand">
+          <img src="../brand/logo/surevo-horizontal-reverse.svg" alt="Surevo">
+          <p>המוכר שלך בוואטסאפ.<br>תמיד ער.</p>
+        </div>
+        <div class="footer-links">
+          <a href="/v2/agent">הסוכן</a><a href="/v2/how-it-works">איך זה עובד</a><a href="/v2/pricing">תמחור</a><a href="/v2/results">תוצאות</a><a href="/v2/agencies">לסוכנויות</a><a href="/v2/about">אודות</a><a href="/v2/blog">בלוג</a><a href="/v2/contact">צור קשר</a>
+        </div>
+        <div class="footer-made">
+          <div class="vero-avatar vero-sm" data-expression="idle"></div>
+          <span>נבנה בישראל<br><small>בשביל עסקים ישראליים</small></span>
+        </div>
+      </div>
+      <div class="copyright"><span>© 2026 Surevo. כל הזכויות שמורות.</span><span><a href="/v2/privacy">פרטיות</a> · <a href="/v2/terms">תנאי שימוש</a> · <a href="/v2/accessibility">נגישות</a></span></div>
+    </div>
+  </footer>
+
+  <button class="chat-launcher" id="chatLauncher" type="button" aria-label="פתח שיחה עם ורו" aria-expanded="false">
+    <span class="launcher-ring"></span>
+    <div class="vero-avatar vero-sm" data-expression="talking"></div>
+    <span class="launcher-label">אפשר לשאול אותי</span>
+  </button>
+
+  <aside class="live-chat" id="liveChat" aria-hidden="true" aria-label="שיחה עם ורו">
+    <div class="live-chat-head">
+      <div class="chat-contact">
+        <div class="avatar-ring"><div class="vero-avatar vero-sm" data-expression="talking"></div></div>
+        <div><b>ורו מ-Surevo</b><small><span class="online-dot"></span> מחובר עכשיו</small></div>
+      </div>
+      <button class="icon-button" id="chatClose" type="button" aria-label="סגור צ׳אט"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <div class="live-chat-body" id="liveChatMessages" aria-live="polite"></div>
+    <div class="quick-replies" id="quickReplies">
+      <button type="button">תראה לי מוצר</button>
+      <button type="button">איך זה עובד?</button>
+      <button type="button">כמה זה עולה?</button>
+      <button type="button">קבעו לי אבחון</button>
+    </div>
+    <form class="live-chat-form" id="liveChatForm">
+      <label class="sr-only" for="chatInput">כתוב הודעה</label>
+      <input id="chatInput" type="text" autocomplete="off" placeholder="אפשר לשאול אותי הכל…" maxlength="180">
+      <button type="submit" aria-label="שלח הודעה"><svg><use href="#i-send"/></svg></button>
+    </form>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div class="vero-avatar vero-xs" data-expression="wink"></div>
+    <span></span>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

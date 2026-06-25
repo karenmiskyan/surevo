@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surevo — Business Logic & Sales Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--green:#0E9F6E;--green-bright:#16B98A;--pine:#07231B;--forest:#0C3A2A;--mint:#E9F4EE;--vmint:#4FE3B0;--honey:#FFC857;--ink:#0B1410;--slate:#5A6B63;--mist:#9AA8A1;--paper:#F6F9F7;--line:#E2EDE7}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  section{padding:48px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+  h2{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:8px 0 10px}
+  h3{font-size:17px;font-weight:700;margin:0 0 6px}
+  p{font-size:15.5px;color:#2C3A33;max-width:720px}
+  .muted{color:var(--slate);font-size:14px}
+  .mono{font-family:'DM Mono',monospace}
+  b.g{color:var(--green)}
+  .cover{background:var(--pine);color:#fff}
+  .cover .inner{max-width:980px;margin:0 auto;padding:64px 24px 56px}
+  .cover .eyebrow{color:var(--vmint)}
+  .cover h1{font-size:42px;font-weight:700;letter-spacing:-.03em;margin:12px 0 10px;line-height:1.08}
+  .cover p{color:#BFE9D8;font-size:17px;max-width:640px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .chips span{font-size:12.5px;font-weight:600;background:rgba(255,255,255,.1);color:#DFF5EC;border-radius:999px;padding:6px 13px}
+
+  .engine{background:var(--mint);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-top:6px}
+  .engine .line{font-size:19px;font-weight:700;color:var(--forest);line-height:1.5}
+  .engine .line .ar{color:var(--green);font-weight:700;margin:0 6px}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+  .pop{border:2px solid var(--green);position:relative}
+  .pop .badge{position:absolute;top:-11px;left:20px;background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.04em}
+  .price .setup{font-size:13px;color:var(--slate)}
+  .price .mo{font-size:30px;font-weight:700;letter-spacing:-.02em}
+  .price .mo small{font-size:14px;font-weight:500;color:var(--slate)}
+  ul.feat{list-style:none;margin-top:12px}
+  ul.feat li{font-size:13.5px;padding:5px 0 5px 22px;position:relative;color:#2C3A33}
+  ul.feat li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+
+  .metric{background:var(--mint);border-radius:13px;padding:16px}
+  .metric .lab{font-size:12.5px;color:var(--slate)}
+  .metric .val{font-size:26px;font-weight:700;letter-spacing:-.02em;margin-top:3px}
+  .metric .val small{font-size:13px;color:var(--slate);font-weight:500}
+
+  .funnel{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+  .stage{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 16px}
+  .stage .n{width:30px;height:30px;flex:0 0 auto;border-radius:50%;background:var(--mint);color:var(--forest);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .stage .body{flex:1}
+  .stage .t{font-weight:700;font-size:15px}
+  .stage .d{font-size:13px;color:var(--slate)}
+  .stage .k{font-family:'DM Mono';font-size:12px;color:var(--green);white-space:nowrap}
+
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--slate)}
+  td.num{font-family:'DM Mono';text-align:right}
+
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:8px}
+  .vs .col{padding:20px}
+  .vs .you{background:var(--mint)}
+  .vs .them{background:#fff;border-left:1px solid var(--line)}
+  .vs h3{font-size:15px}
+  .vs ul{list-style:none;margin-top:8px}
+  .vs li{font-size:13.5px;padding:5px 0;color:#2C3A33}
+  .quote{background:var(--pine);color:#DFF5EC;border-radius:16px;padding:20px 24px;font-size:16px;margin-top:14px}
+  .quote b{color:#fff}
+  @media(max-width:720px){.grid3,.grid2,.grid4,.vs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="inner">
+    <div class="eyebrow">Business logic · sales playbook</div>
+    <h1>How Surevo makes money — and how we sell it</h1>
+    <p>A done-for-you model that pays for its own growth. We don't fight TukiAI's “free.” We sell a managed result to busy store owners — and the setup fee funds every new customer.</p>
+    <div class="chips"><span>Done-for-you</span><span>Setup fee + monthly</span><span>Founder-led outreach</span><span>Paid-ads accelerant</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ENGINE -->
+  <section>
+    <div class="eyebrow">01 · The engine</div>
+    <h2>The model in one line</h2>
+    <div class="engine">
+      <div class="line">Free WhatsApp sales audit <span class="ar">→</span> live demo on their store <span class="ar">→</span> we install &amp; manage it for them <span class="ar">→</span> setup fee covers acquisition <span class="ar">→</span> monthly fee is recurring margin.</div>
+    </div>
+    <p style="margin-top:16px">The whole strategy rests on one idea TukiAI can't copy: <b class="g">you charge a setup fee, so every customer is profitable on day one.</b> TukiAI burns cash giving 3 months free and hoping people convert. You collect ₪2,900 up front — which more than covers what it costs to win the customer — then bank the monthly. That's a business that funds its own growth instead of bleeding.</p>
+  </section>
+
+  <!-- OFFER -->
+  <section>
+    <div class="eyebrow">02 · The offer</div>
+    <h2>What we actually sell</h2>
+    <p>Not “a chatbot plugin.” A <b>managed seller</b>: we install it, connect it to their catalog and Israeli invoicing, train it to sell in real Hebrew, and tune it every month. The store owner does nothing.</p>
+    <div class="grid3" style="margin-top:20px">
+      <div class="card">
+        <div class="muted mono">לאנץ׳ · Launch</div>
+        <div class="price"><div class="setup">Setup ₪1,490 · then</div><div class="mo">₪390<small>/mo</small></div></div>
+        <ul class="feat"><li>DFY install — WhatsApp + site</li><li>Catalog &amp; inventory sync</li><li>Hebrew sales training</li><li>Monthly performance report</li></ul>
+        <div class="muted" style="margin-top:10px">Small stores, getting started</div>
+      </div>
+      <div class="card pop">
+        <div class="badge">MOST POPULAR</div>
+        <div class="muted mono">צמיחה · Growth</div>
+        <div class="price"><div class="setup">Setup ₪2,900 · then</div><div class="mo">₪890<small>/mo</small></div></div>
+        <ul class="feat"><li>Everything in Launch</li><li>Israeli integrations — iCount, Greeninvoice, Cardcom</li><li>Abandoned-cart recovery</li><li>Upsell &amp; cross-sell, sentiment</li><li>Monthly optimisation call</li></ul>
+        <div class="muted" style="margin-top:10px">₪100K–₪1M revenue stores</div>
+      </div>
+      <div class="card">
+        <div class="muted mono">מותג · Scale / Agency</div>
+        <div class="price"><div class="setup">Custom setup · from</div><div class="mo">₪1,490<small>/mo</small></div></div>
+        <ul class="feat"><li>Multi-store / white-label</li><li>Dedicated account manager</li><li>Custom fine-tuning</li><li>API &amp; priority SLA</li></ul>
+        <div class="muted" style="margin-top:10px">Brands &amp; agencies (5–15 stores)</div>
+      </div>
+    </div>
+    <div class="quote">Risk-reversal that kills “but TukiAI is free”: <b>30-day guarantee — if Surevo doesn't recover at least its monthly fee in its first month, we refund the setup.</b> You can offer this because you only sell to stores the audit already proved are leaking money.</div>
+  </section>
+
+  <!-- ECONOMICS -->
+  <section>
+    <div class="eyebrow">03 · The money math</div>
+    <h2>Why the numbers work</h2>
+    <p class="muted">Illustrative, Growth tier (₪2,900 setup + ₪890/mo), conservative 18-month lifetime.</p>
+    <div class="grid4" style="margin-top:16px">
+      <div class="metric"><div class="lab">Year-1 revenue / customer</div><div class="val">₪13,580</div></div>
+      <div class="metric"><div class="lab">LTV (18 mo)</div><div class="val">₪18,920</div></div>
+      <div class="metric"><div class="lab">CAC (paid ads)</div><div class="val">~₪2,000</div></div>
+      <div class="metric"><div class="lab">LTV : CAC</div><div class="val">~9 : 1</div></div>
+    </div>
+    <p style="margin-top:18px">The setup fee (₪2,900) is <b>larger than the cost to acquire the customer</b> (~₪2,000 via ads, near-zero via outreach). So you're cash-positive the moment they sign — before the first monthly even lands. Healthy SaaS aims for LTV:CAC above 3:1; this model sits near 9:1 because the customer pre-pays their own acquisition.</p>
+  </section>
+
+  <!-- FUNNEL -->
+  <section>
+    <div class="eyebrow">04 · The sales motion</div>
+    <h2>The funnel, stage by stage</h2>
+    <p>Founder-led outreach is the spine; paid ads pour fuel on top. Both feed the same machine: the free audit.</p>
+    <div class="funnel" style="margin-top:16px">
+      <div class="stage"><div class="n">1</div><div class="body"><div class="t">Attract</div><div class="d">Ads (“free WhatsApp sales audit”) + cold list from BuiltWith / ShopRank (.co.il WooCommerce stores).</div></div><div class="k">→ leads</div></div>
+      <div class="stage"><div class="n">2</div><div class="body"><div class="t">Diagnose — the free audit</div><div class="d">Show them their leak in ₪: abandoned carts, after-hours questions missed, slow replies. Value first, no pitch.</div></div><div class="k">50% book</div></div>
+      <div class="stage"><div class="n">3</div><div class="body"><div class="t">Demo on their store</div><div class="d">Live Vero answering their real products in real Hebrew, closing a sale in chat. Proof beats slides.</div></div><div class="k">55% → demo</div></div>
+      <div class="stage"><div class="n">4</div><div class="body"><div class="t">Offer + guarantee</div><div class="d">DFY setup + monthly, with the 30-day refund guarantee. You install, they relax.</div></div><div class="k">40% close</div></div>
+      <div class="stage"><div class="n">5</div><div class="body"><div class="t">Onboard (done for you)</div><div class="d">You connect catalog, iCount/Cardcom, train the Hebrew sales voice, go live. ~24h.</div></div><div class="k">setup ₪</div></div>
+      <div class="stage"><div class="n">6</div><div class="body"><div class="t">Retain &amp; expand</div><div class="d">Monthly report shows ₪ recovered → renewal is automatic, and upsell to Growth / more stores is easy.</div></div><div class="k">MRR</div></div>
+    </div>
+    <h3 style="margin-top:24px">One month, by the numbers</h3>
+    <table>
+      <tr><th>Source</th><th>Step</th><th>Result</th></tr>
+      <tr><td>Paid ads ₪6,000</td><td>30 leads → 15 audits → 8 demos</td><td class="num">3 customers</td></tr>
+      <tr><td>Outreach (time)</td><td>~100 touches → 6 demos</td><td class="num">2 customers</td></tr>
+      <tr><td><b>Total / month</b></td><td>blended</td><td class="num"><b>≈ 5 customers</b></td></tr>
+    </table>
+    <p class="muted" style="margin-top:10px">Ad CAC ≈ ₪2,000/customer — fully covered by the ₪2,900 setup fee. Outreach customers cost only your time.</p>
+  </section>
+
+  <!-- DIFFERENTIATION -->
+  <section>
+    <div class="eyebrow">05 · Why we win</div>
+    <h2>Surevo vs TukiAI — different game</h2>
+    <p>You're not a cheaper bot. You're a different category: a managed, local, premium service. The busy store owner who doesn't want to install or babysit anything is <b>your</b> customer, not theirs.</p>
+    <div class="vs">
+      <div class="col you">
+        <h3 style="color:var(--green)">Surevo — done-for-you</h3>
+        <ul>
+          <li>✓ We install, integrate, train &amp; manage it</li>
+          <li>✓ Israeli invoicing &amp; payments built in (moat)</li>
+          <li>✓ Real Israeli sales Hebrew, not translation</li>
+          <li>✓ A human + a face (Vero) you can call</li>
+          <li>✓ Cash-positive from day one (setup fee)</li>
+        </ul>
+      </div>
+      <div class="col them">
+        <h3 style="color:var(--slate)">TukiAI — self-serve & free</h3>
+        <ul>
+          <li>· Owner installs &amp; configures it themselves</li>
+          <li>· No Israeli accounting/payment integrations</li>
+          <li>· Generic multilingual model</li>
+          <li>· Software, no managed relationship</li>
+          <li>· Burns cash on 3-month free pilots</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 90 DAY -->
+  <section>
+    <div class="eyebrow">06 · First 90 days</div>
+    <h2>The plan &amp; the targets</h2>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card"><h3>Month 1 — build the machine</h3><p class="muted">Finalise the offer &amp; guarantee, build the “free audit” landing + ad, source the first 100-store list, run first audits. <b>Target: 3 paying.</b></p></div>
+      <div class="card"><h3>Month 2 — turn on ads</h3><p class="muted">Scale audits, tighten the demo script, first case study with real ₪ recovered. <b>Target: 8 paying total.</b></p></div>
+      <div class="card"><h3>Month 3 — prove repeatability</h3><p class="muted">Steady 5/mo, first agency conversation, referral loop from happy stores. <b>Target: 14 paying total.</b></p></div>
+      <div class="card" style="background:var(--mint)"><h3>Day 90 snapshot</h3>
+        <div class="grid2" style="gap:10px;margin-top:8px">
+          <div class="metric" style="background:#fff"><div class="lab">Paying stores</div><div class="val">~14</div></div>
+          <div class="metric" style="background:#fff"><div class="lab">MRR</div><div class="val">~₪11,200</div></div>
+          <div class="metric" style="background:#fff"><div class="lab">Setup cash collected</div><div class="val">~₪35,000</div></div>
+          <div class="metric" style="background:#fff"><div class="lab">Ad spend (3 mo)</div><div class="val">~₪18,000</div></div>
+        </div>
+        <p class="muted" style="margin-top:10px">Setup cash alone (~₪35K) covers the ad spend (~₪18K) — the machine self-funds while MRR compounds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRIDGE TO DESIGN -->
+  <section style="border-bottom:none">
+    <div class="eyebrow">07 · What this means for the website</div>
+    <h2>The site has one job: book the audit</h2>
+    <p>Because we sell done-for-you through a human-led funnel, the website is <b>not</b> a self-serve checkout. It's a trust-and-capture machine. Every design decision should serve this:</p>
+    <ul class="feat" style="margin-top:10px;max-width:720px">
+      <li><b>Primary CTA everywhere:</b> “קבל אבחון מכירות חינם” (get a free sales audit) — one goal, not “sign up.”</li>
+      <li><b>Hebrew-first, RTL native</b> — an Israeli must land on a page that feels built for them.</li>
+      <li><b>The live demo is the hero</b> — Vero answering real Hebrew questions, closing a sale, front and centre.</li>
+      <li><b>Trust signals:</b> real case study with ₪ recovered, Israeli payment/invoicing logos, the 30-day guarantee, “Made in Israel.”</li>
+      <li><b>Vero everywhere</b> — the face that makes “hand your sales to AI” feel safe.</li>
+      <li><b>Price = reassurance, not a wall</b> — show it's a managed service worth the setup, framed against money it recovers.</li>
+    </ul>
+    <div class="quote" style="margin-top:20px">Next step: turn this into a precise <b>design prompt</b> for the new Surevo site — Hebrew-first, audit-focused, Vero-led — built directly on this business logic and the brand we just created.</div>
+  </section>
+
+</div>
+</body>
+</html>

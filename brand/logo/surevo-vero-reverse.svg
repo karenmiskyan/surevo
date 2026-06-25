@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64" role="img" aria-label="Surevo — Vero icon, reverse">
+  <title>Surevo — Vero (reverse, for dark backgrounds)</title>
+  <rect x="6" y="8" width="52" height="38" rx="14" fill="#FFFFFF"/>
+  <path d="M18 46 L18 57 L30 46 Z" fill="#FFFFFF"/>
+  <circle cx="25" cy="25" r="3" fill="#0E9F6E"/>
+  <path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#0E9F6E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M25 35 q7 5.5 14 0" fill="none" stroke="#0E9F6E" stroke-width="3" stroke-linecap="round"/>
+</svg>

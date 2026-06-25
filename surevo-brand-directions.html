@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surevo — Brand Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@400;500;600;700&family=Heebo:wght@400;500;700;800&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1020;
+    --paper:#F7F8FB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 24px 80px}
+  .masthead{margin-bottom:40px;border-bottom:1px solid #E5E8F0;padding-bottom:28px}
+  .kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#7A8094;font-weight:600}
+  h1{font-family:'Sora',sans-serif;font-size:38px;font-weight:800;letter-spacing:-.02em;margin:10px 0 8px}
+  .lede{font-size:17px;color:#4A5066;max-width:680px}
+  .principle{margin-top:22px;background:#fff;border:1px solid #E5E8F0;border-radius:16px;padding:18px 22px;display:flex;gap:16px;align-items:center}
+  .principle .vmark{font-family:'Sora';font-weight:800;font-size:34px;color:#4F46E5}
+  .principle p{font-size:15px;color:#3A4056}
+  .principle b{color:var(--ink)}
+
+  .dir{background:#fff;border:1px solid #E5E8F0;border-radius:24px;padding:0;margin-top:36px;overflow:hidden}
+  .dir-head{padding:26px 30px 22px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px}
+  .dir-head .left .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#9096A8}
+  .dir-head .left h2{font-family:'Sora';font-size:26px;font-weight:700;letter-spacing:-.01em;margin:4px 0 4px}
+  .dir-head .left .sub{font-size:15px;color:#5A6076;max-width:520px}
+  .pill{align-self:center;font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:999px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #EEF0F6}
+  .cell{padding:26px 30px;border-right:1px solid #EEF0F6;border-bottom:1px solid #EEF0F6}
+  .cell:nth-child(2n){border-right:none}
+  .cell h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9096A8;font-weight:700;margin-bottom:16px}
+
+  .logo-stage{border-radius:16px;height:130px;display:flex;align-items:center;justify-content:center;gap:14px}
+  .logo-stage.dark{margin-top:14px}
+  .wordmark{font-weight:800;letter-spacing:-.02em;font-size:34px;display:flex;align-items:baseline}
+
+  .swatches{display:flex;gap:10px;flex-wrap:wrap}
+  .sw{width:64px}
+  .sw .chip{height:54px;border-radius:12px;border:1px solid rgba(0,0,0,.06)}
+  .sw .hex{font-size:11px;color:#6A7088;margin-top:6px;font-weight:600;font-family:'DM Sans'}
+  .sw .nm{font-size:11px;color:#9096A8}
+
+  .type-row{margin-bottom:14px}
+  .type-row .role{font-size:12px;color:#9096A8;font-weight:600;margin-bottom:2px}
+  .type-row .samp{font-size:24px;letter-spacing:-.01em}
+  .type-row .meta{font-size:12px;color:#9096A8;font-family:'DM Sans'}
+
+  .voice{display:flex;gap:8px;flex-wrap:wrap}
+  .voice span{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#F1F2F7;color:#3A4056}
+
+  .he{direction:rtl;text-align:right;font-family:'Heebo',sans-serif}
+  .he .tagline{font-size:19px;font-weight:500;color:#3A4056}
+
+  .ctx{border-radius:18px;padding:18px;height:100%}
+  .bubble{max-width:78%;padding:10px 14px;border-radius:16px;font-size:14px;margin-bottom:8px;line-height:1.45}
+  .bubble.them{background:#fff;border:1px solid #E5E8F0;border-bottom-left-radius:5px}
+  .bubble.us{margin-left:auto;border-bottom-right-radius:5px;color:#fff}
+  .bubble .tick{font-size:12px;opacity:.85;margin-left:4px}
+
+  .icon-mark{width:56px;height:56px;flex:0 0 auto}
+  .footer-note{margin-top:46px;text-align:center;color:#7A8094;font-size:14px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}.cell{border-right:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="kicker">Brand exploration · for Karen / Fast Cybers</div>
+    <h1>Surevo — three brand directions</h1>
+    <p class="lede">Three distinct visual identities for Surevo, the WhatsApp-first AI sales agent for Israeli WooCommerce stores. Each is built to stand apart from TukiAI's playful parrot world and to feel premium, local, and trustworthy. Pick one — or mix elements — and I'll build the full identity system from it.</p>
+    <div class="principle">
+      <div class="vmark">v✓</div>
+      <p>One idea runs through all three: the <b>“v” in Surevo is a checkmark</b> — the “delivered” tick, the “sure thing,” the closed deal. It's the brand's signature gesture, recognisable even on its own.</p>
+    </div>
+  </div>
+
+  <!-- ============ DIRECTION A ============ -->
+  <section class="dir">
+    <div class="dir-head">
+      <div class="left">
+        <div class="tag">Direction A</div>
+        <h2>The Closer</h2>
+        <div class="sub">Premium, decisive, intelligent. Indigo confidence with a “signal” mint accent. Reads like a serious B2B SaaS that closes deals — the trustworthy choice against a colourful competitor.</div>
+      </div>
+      <div class="pill" style="background:#EEF0FE;color:#4F46E5">Premium · Confident</div>
+    </div>
+    <div class="grid">
+      <!-- logo light -->
+      <div class="cell">
+        <h3>Logo — light & dark</h3>
+        <div class="logo-stage" style="background:#F4F5FB">
+          <svg class="icon-mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#4F46E5"/><path d="M18 33 L28 43 L47 21" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M47 21 L47 34" stroke="#A5F3D0" stroke-width="6" stroke-linecap="round"/></svg>
+          <div class="wordmark" style="font-family:'Sora';color:#0B1020">sure<span style="color:#4F46E5">v</span>o</div>
+        </div>
+        <div class="logo-stage dark" style="background:#0B1020">
+          <svg class="icon-mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#6366F1"/><path d="M18 33 L28 43 L47 21" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M47 21 L47 34" stroke="#6EE7B7" stroke-width="6" stroke-linecap="round"/></svg>
+          <div class="wordmark" style="font-family:'Sora';color:#fff">sure<span style="color:#A5B4FC">v</span>o</div>
+        </div>
+      </div>
+      <!-- palette -->
+      <div class="cell">
+        <h3>Colour palette</h3>
+        <div class="swatches">
+          <div class="sw"><div class="chip" style="background:#4F46E5"></div><div class="hex">#4F46E5</div><div class="nm">Indigo</div></div>
+          <div class="sw"><div class="chip" style="background:#0B1020"></div><div class="hex">#0B1020</div><div class="nm">Ink</div></div>
+          <div class="sw"><div class="chip" style="background:#6EE7B7"></div><div class="hex">#6EE7B7</div><div class="nm">Signal</div></div>
+          <div class="sw"><div class="chip" style="background:#EEF0FE"></div><div class="hex">#EEF0FE</div><div class="nm">Lilac</div></div>
+          <div class="sw"><div class="chip" style="background:#F7F8FB;border:1px solid #E5E8F0"></div><div class="hex">#F7F8FB</div><div class="nm">Paper</div></div>
+        </div>
+        <h3 style="margin-top:24px">Typography</h3>
+        <div class="type-row"><div class="role">Display / logo</div><div class="samp" style="font-family:'Sora';font-weight:800">Sora ExtraBold</div><div class="meta">Geometric, engineered, confident</div></div>
+        <div class="type-row"><div class="role">Body</div><div class="samp" style="font-family:'Plus Jakarta Sans';font-size:18px">Plus Jakarta Sans</div><div class="meta">Clean, modern, neutral</div></div>
+      </div>
+      <!-- hebrew -->
+      <div class="cell">
+        <h3>Hebrew lockup</h3>
+        <div class="he">
+          <div class="wordmark" style="font-family:'Sora';justify-content:flex-end;color:#0B1020">sure<span style="color:#4F46E5">v</span>o</div>
+          <div class="tagline" style="margin-top:10px">סוכן המכירות החכם לחנות שלך</div>
+          <div style="font-size:13px;color:#9096A8;margin-top:4px">The smart sales agent for your store</div>
+        </div>
+        <div class="voice" style="margin-top:22px">
+          <span>וודאות · Certainty</span><span>סוגר עסקה · Closes</span><span>פרימיום</span><span>חכם</span>
+        </div>
+      </div>
+      <!-- context -->
+      <div class="cell">
+        <h3>In context — chat</h3>
+        <div class="ctx" style="background:#F0F1F9">
+          <div class="bubble them">יש לכם את זה במידה L? 🤔</div>
+          <div class="bubble us" style="background:#4F46E5">כן! במלאי, ומשלוח חינם מעל ₪200. אשמור לך אחד?<span class="tick">✓✓</span></div>
+          <div class="bubble them">מעולה, קח 🙌</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIRECTION B ============ -->
+  <section class="dir">
+    <div class="dir-head">
+      <div class="left">
+        <div class="tag">Direction B</div>
+        <h2>Native</h2>
+        <div class="sub">WhatsApp-native and human. A deep, premium emerald (not the literal WhatsApp green) with warm sand. Feels like it was born inside the chat — local, approachable, trusted by the neighbourhood store owner.</div>
+      </div>
+      <div class="pill" style="background:#E3F5EC;color:#0E8A5F">Warm · Conversational</div>
+    </div>
+    <div class="grid">
+      <div class="cell">
+        <h3>Logo — light & dark</h3>
+        <div class="logo-stage" style="background:#F3F7F4">
+          <svg class="icon-mark" viewBox="0 0 64 64"><path d="M14 12 H50 a8 8 0 0 1 8 8 V40 a8 8 0 0 1 -8 8 H30 L18 58 V48 H14 a8 8 0 0 1 -8 -8 V20 a8 8 0 0 1 8 -8 Z" fill="#10A37F"/><path d="M21 31 L29 39 L45 21" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="wordmark" style="font-family:'DM Sans';color:#10402F">sure<span style="color:#10A37F">v</span>o</div>
+        </div>
+        <div class="logo-stage dark" style="background:#0C1E17">
+          <svg class="icon-mark" viewBox="0 0 64 64"><path d="M14 12 H50 a8 8 0 0 1 8 8 V40 a8 8 0 0 1 -8 8 H30 L18 58 V48 H14 a8 8 0 0 1 -8 -8 V20 a8 8 0 0 1 8 -8 Z" fill="#1DC08E"/><path d="M21 31 L29 39 L45 21" fill="none" stroke="#08251B" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="wordmark" style="font-family:'DM Sans';color:#fff">sure<span style="color:#4FE3B0">v</span>o</div>
+        </div>
+      </div>
+      <div class="cell">
+        <h3>Colour palette</h3>
+        <div class="swatches">
+          <div class="sw"><div class="chip" style="background:#10A37F"></div><div class="hex">#10A37F</div><div class="nm">Emerald</div></div>
+          <div class="sw"><div class="chip" style="background:#0C1E17"></div><div class="hex">#0C1E17</div><div class="nm">Forest</div></div>
+          <div class="sw"><div class="chip" style="background:#F3E9D7"></div><div class="hex">#F3E9D7</div><div class="nm">Sand</div></div>
+          <div class="sw"><div class="chip" style="background:#FFC857"></div><div class="hex">#FFC857</div><div class="nm">Honey</div></div>
+          <div class="sw"><div class="chip" style="background:#F3F7F4;border:1px solid #E2EAE5"></div><div class="hex">#F3F7F4</div><div class="nm">Mist</div></div>
+        </div>
+        <h3 style="margin-top:24px">Typography</h3>
+        <div class="type-row"><div class="role">Display / logo</div><div class="samp" style="font-family:'DM Sans';font-weight:700">DM Sans Bold</div><div class="meta">Friendly, humanist, warm</div></div>
+        <div class="type-row"><div class="role">Body</div><div class="samp" style="font-family:'DM Sans';font-size:18px">DM Sans Regular</div><div class="meta">Approachable, readable</div></div>
+      </div>
+      <div class="cell">
+        <h3>Hebrew lockup</h3>
+        <div class="he">
+          <div class="wordmark" style="font-family:'DM Sans';justify-content:flex-end;color:#10402F">sure<span style="color:#10A37F">v</span>o</div>
+          <div class="tagline" style="margin-top:10px;font-family:'Assistant'">המוכר שלך בוואטסאפ. תמיד ער.</div>
+          <div style="font-size:13px;color:#9096A8;margin-top:4px">Your seller on WhatsApp. Always awake.</div>
+        </div>
+        <div class="voice" style="margin-top:22px">
+          <span>בוואטסאפ · On WhatsApp</span><span>אנושי · Human</span><span>מקומי</span><span>נגיש</span>
+        </div>
+      </div>
+      <div class="cell">
+        <h3>In context — chat</h3>
+        <div class="ctx" style="background:#E7F0E9">
+          <div class="bubble them">יש לכם את זה במידה L? 🤔</div>
+          <div class="bubble us" style="background:#10A37F">כן! במלאי 🎉 משלוח חינם מעל ₪200. אשמור לך?<span class="tick">✓✓</span></div>
+          <div class="bubble them">סבבה, קח 🙌</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIRECTION C ============ -->
+  <section class="dir">
+    <div class="dir-head">
+      <div class="left">
+        <div class="tag">Direction C</div>
+        <h2>Signal</h2>
+        <div class="sub">Cutting-edge and kinetic. Near-black canvas with an electric blue→violet energy. The mark is an upward “spark” of stacked bars — momentum, AI, a sale rising. For a brand that wants to look like the future of selling.</div>
+      </div>
+      <div class="pill" style="background:#E9E7FB;color:#4338CA">Futuristic · Kinetic</div>
+    </div>
+    <div class="grid">
+      <div class="cell">
+        <h3>Logo — light & dark</h3>
+        <div class="logo-stage" style="background:#F2F3F9">
+          <svg class="icon-mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0A0A14"/><rect x="17" y="38" width="7" height="12" rx="3.5" fill="#3B82F6"/><rect x="28.5" y="28" width="7" height="22" rx="3.5" fill="#6366F1"/><rect x="40" y="16" width="7" height="34" rx="3.5" fill="#A855F7"/><circle cx="43.5" cy="13" r="4.5" fill="#E879F9"/></svg>
+          <div class="wordmark" style="font-family:'Space Grotesk';font-weight:700;color:#0A0A14">sure<span style="color:#6366F1">v</span>o</div>
+        </div>
+        <div class="logo-stage dark" style="background:#0A0A14">
+          <svg class="icon-mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#15152A"/><rect x="17" y="38" width="7" height="12" rx="3.5" fill="#3B82F6"/><rect x="28.5" y="28" width="7" height="22" rx="3.5" fill="#818CF8"/><rect x="40" y="16" width="7" height="34" rx="3.5" fill="#C084FC"/><circle cx="43.5" cy="13" r="4.5" fill="#F0ABFC"/></svg>
+          <div class="wordmark" style="font-family:'Space Grotesk';font-weight:700;color:#fff">sure<span style="color:#A78BFA">v</span>o</div>
+        </div>
+      </div>
+      <div class="cell">
+        <h3>Colour palette</h3>
+        <div class="swatches">
+          <div class="sw"><div class="chip" style="background:#6366F1"></div><div class="hex">#6366F1</div><div class="nm">Iris</div></div>
+          <div class="sw"><div class="chip" style="background:#A855F7"></div><div class="hex">#A855F7</div><div class="nm">Violet</div></div>
+          <div class="sw"><div class="chip" style="background:#3B82F6"></div><div class="hex">#3B82F6</div><div class="nm">Electric</div></div>
+          <div class="sw"><div class="chip" style="background:#0A0A14"></div><div class="hex">#0A0A14</div><div class="nm">Void</div></div>
+          <div class="sw"><div class="chip" style="background:#E879F9"></div><div class="hex">#E879F9</div><div class="nm">Pulse</div></div>
+        </div>
+        <h3 style="margin-top:24px">Typography</h3>
+        <div class="type-row"><div class="role">Display / logo</div><div class="samp" style="font-family:'Space Grotesk';font-weight:700">Space Grotesk</div><div class="meta">Techy, kinetic, precise</div></div>
+        <div class="type-row"><div class="role">Body</div><div class="samp" style="font-family:'Plus Jakarta Sans';font-size:18px">Plus Jakarta Sans</div><div class="meta">Neutral counterweight</div></div>
+      </div>
+      <div class="cell">
+        <h3>Hebrew lockup</h3>
+        <div class="he">
+          <div class="wordmark" style="font-family:'Space Grotesk';font-weight:700;justify-content:flex-end;color:#0A0A14">sure<span style="color:#6366F1">v</span>o</div>
+          <div class="tagline" style="margin-top:10px">מנוע המכירות שלא ישן לעולם</div>
+          <div style="font-size:13px;color:#9096A8;margin-top:4px">The sales engine that never sleeps</div>
+        </div>
+        <div class="voice" style="margin-top:22px">
+          <span>מהיר · Fast</span><span>חכם · AI</span><span>עתידני</span><span>אנרגטי</span>
+        </div>
+      </div>
+      <div class="cell">
+        <h3>In context — chat</h3>
+        <div class="ctx" style="background:#13132A">
+          <div class="bubble them" style="background:#22223E;border:none;color:#E8E8F5">יש לכם את זה במידה L? 🤔</div>
+          <div class="bubble us" style="background:#6366F1">כן! במלאי. משלוח חינם מעל ₪200. אשמור לך אחד?<span class="tick">✓✓</span></div>
+          <div class="bubble them" style="background:#22223E;border:none;color:#E8E8F5">יאללה, קח 🔥</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="footer-note">Tell me which direction speaks to you — A, B, or C — and I'll build the full identity: final logo set (icon, horizontal, stacked, mono), Hebrew + English lockups, the complete colour and type system, and brand guidelines.</p>
+
+</div>
+</body>
+</html>

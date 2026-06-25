@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="200" viewBox="0 0 220 100" role="img" aria-label="Surevo — Hebrew lockup">
+  <title>Surevo — Hebrew lockup (RTL)</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;family=Assistant:wght@600&amp;display=swap');
+  .wm{font-family:'DM Sans','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:36px;letter-spacing:-1px}
+  .he{font-family:'Assistant','Segoe UI',system-ui,sans-serif;font-weight:600;font-size:16px}</style>
+  <g transform="translate(150 6) scale(0.9)">
+    <rect x="6" y="8" width="52" height="38" rx="14" fill="#0E9F6E"/>
+    <path d="M18 46 L18 57 L30 46 Z" fill="#0E9F6E"/>
+    <circle cx="25" cy="25" r="3" fill="#FFFFFF"/>
+    <path d="M35 25 L38.3 28.3 L45 20" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M25 35 q7 5.5 14 0" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text class="wm" x="135" y="44" text-anchor="end"><tspan fill="#0B1410">sure</tspan><tspan fill="#0E9F6E">v</tspan><tspan fill="#0B1410">o</tspan></text>
+  <text class="he" x="205" y="78" text-anchor="end" direction="rtl" fill="#5A6B63">המוכר שלך בוואטסאפ. תמיד ער.</text>
+</svg>
