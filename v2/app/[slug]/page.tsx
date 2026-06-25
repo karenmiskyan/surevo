@@ -149,7 +149,7 @@ function HowPage() {
 }
 
 const cases = [
-  { industry: "אופנה", metric: "₪14,280", title: "Studio North", body: "מכירות שהוחזרו בחודש הראשון בעזרת תשובות מיידיות והצלת סלים.", stat: "+23% המרות" },
+  { industry: "אופנה", metric: "₪ 14,280", title: "Studio North", body: "מכירות שהוחזרו בחודש הראשון בעזרת תשובות מיידיות והצלת סלים.", stat: "+23% המרות" },
   { industry: "קוסמטיקה", metric: "31", title: "Noya Skin", body: "סלים שניצלו אחרי שוורו ענה על התאמה לעור רגיש בשיחה קצרה.", stat: "18% יותר הזמנות" },
   { industry: "בית", metric: "2.7x", title: "Forma Home", body: "יותר הזמנות בשעות שבהן צוות השירות כבר לא היה מול המסך.", stat: "24/7 מענה" },
 ];
