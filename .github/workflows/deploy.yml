@@ -67,6 +67,7 @@ jobs:
       - name: Deploy to cPanel document root
         run: |
           rsync -az --delete \
+            --exclude ".well-known/" \
             -e "ssh -i ~/.ssh/surevo_deploy_key -o IdentitiesOnly=yes" \
             out/ \
             "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/home/surevo/public_html/"
