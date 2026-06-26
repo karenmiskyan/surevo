@@ -2,6 +2,16 @@ const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, reducedMotion ? Math.min(ms, 80) : ms));
+const basePath = window.location.pathname.startsWith("/v2") ? "/v2" : "";
+const leadEndpoint = `${basePath}/api/leads`;
+
+function track(eventName, data = {}) {
+  const payload = { event: eventName, ...data };
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(payload);
+  if (typeof window.gtag === "function") window.gtag("event", eventName, data);
+  window.dispatchEvent(new CustomEvent("surevo:track", { detail: payload }));
+}
 
 const now = () => new Intl.DateTimeFormat("he-IL", {
   hour: "2-digit",
@@ -128,6 +138,7 @@ async function addProductToCart(card, options = {}) {
   card.classList.add("added");
   button.classList.remove("adding");
   button.innerHTML = '<span>נוסף לסל</span><span class="commerce-check">✓</span>';
+  track("demo_add_to_cart", { product: card.dataset.product || "demo_product" });
   if (!options.silent && typeof showToast === "function") showToast("המוצר נוסף לסל בהצלחה");
 }
 
@@ -407,22 +418,91 @@ $$(".faq-item button").forEach((button) => {
   });
 });
 
-/* Audit form demo */
-const auditForm = $("#auditForm");
-const formSuccess = $("#formSuccess");
+/* Lead forms */
 const toast = $("#toast");
 let toastTimer;
 
 function showToast(message) {
+  if (!toast) return;
   $("span", toast).textContent = message;
   toast.classList.add("show");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
 }
 
-auditForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const required = $$("[required]", auditForm);
+function getLeadFormContext(form) {
+  return form.dataset.formContext || "audit";
+}
+
+function validateStoreUrl(value) {
+  const cleaned = value.trim();
+  if (!cleaned) return false;
+  try {
+    const url = new URL(cleaned.includes("://") ? cleaned : `https://${cleaned}`);
+    return Boolean(url.hostname.includes("."));
+  } catch {
+    return false;
+  }
+}
+
+function collectLeadPayload(form) {
+  const consent = $('[name="whatsappConsent"]', form);
+  return {
+    source: getLeadFormContext(form),
+    page: window.location.pathname,
+    store: $('[name="store"]', form)?.value.trim() || "",
+    name: $('[name="name"]', form)?.value.trim() || "",
+    phone: $('[name="phone"]', form)?.value.trim() || "",
+    revenue: $('[name="revenue"]', form)?.value.trim() || "",
+    whatsappConsent: Boolean(consent?.checked),
+    consentText: consent?.closest(".consent-field")?.textContent.replace(/\s+/g, " ").trim() || "",
+  };
+}
+
+async function submitLeadForm(form) {
+  const button = $('button[type="submit"]', form);
+  const originalLabel = button?.innerHTML;
+  const card = form.closest(".audit-card");
+  const success = $(".form-success", card || document);
+  const payload = collectLeadPayload(form);
+
+  track("form_submit_attempt", { source: payload.source, page: payload.page });
+  if (button) {
+    button.disabled = true;
+    button.innerHTML = "<span>שולח...</span>";
+  }
+
+  try {
+    const response = await fetch(leadEndpoint, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) throw new Error(result.error || "lead_submit_failed");
+
+    form.hidden = true;
+    if (success) success.hidden = false;
+    showToast("הבקשה התקבלה. נחזור אליך בוואטסאפ");
+    track("form_submit", { source: payload.source, page: payload.page, lead_id: result.id });
+    if (["homepage", "audit", "contact"].includes(payload.source)) {
+      track("audit_submit", { source: payload.source, page: payload.page, lead_id: result.id });
+    }
+    track("thank_you", { source: payload.source, page: payload.page, lead_id: result.id });
+  } catch (error) {
+    console.error("Lead form submit failed", error);
+    showToast("השליחה לא הצליחה. אפשר לנסות שוב או לפנות בוואטסאפ");
+    track("form_submit_error", { source: payload.source, page: payload.page });
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.innerHTML = originalLabel;
+    }
+  }
+}
+
+function validateLeadForm(form) {
+  const required = $$("[required]", form);
   let valid = true;
 
   required.forEach((field) => {
@@ -431,34 +511,59 @@ auditForm?.addEventListener("submit", (event) => {
     valid = valid && !empty;
   });
 
-  const phone = $('[name="phone"]', auditForm);
-  const digits = phone.value.replace(/\D/g, "");
-  if (digits.length < 8) {
+  const store = $('[name="store"]', form);
+  if (store && !validateStoreUrl(store.value)) {
+    store.classList.add("invalid");
+    valid = false;
+  }
+
+  const phone = $('[name="phone"]', form);
+  const digits = phone?.value.replace(/\D/g, "") || "";
+  if (phone && digits.length < 8) {
     phone.classList.add("invalid");
     valid = false;
   }
 
-  if (!valid) {
-    showToast("חסרים כמה פרטים קטנים לפני שממשיכים");
-    return;
-  }
+  return valid;
+}
 
-  auditForm.hidden = true;
-  formSuccess.hidden = false;
-  showToast("הבקשה התקבלה. נחזור אליך בוואטסאפ");
-});
+$$("[data-lead-form]").forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!validateLeadForm(form)) {
+      showToast("חסרים כמה פרטים קטנים לפני שממשיכים");
+      return;
+    }
+    submitLeadForm(form);
+  });
 
-if (auditForm) {
-  $$("input, select", auditForm).forEach((field) => {
+  $$("input, select", form).forEach((field) => {
     field.addEventListener("input", () => field.classList.remove("invalid"));
     field.addEventListener("change", () => field.classList.remove("invalid"));
   });
-}
 
-$("#resetForm")?.addEventListener("click", () => {
-  auditForm.reset();
-  auditForm.hidden = false;
-  formSuccess.hidden = true;
+  const reset = $(".form-success .text-link", form.closest(".audit-card") || document);
+  reset?.addEventListener("click", () => {
+    form.reset();
+    form.hidden = false;
+    const success = $(".form-success", form.closest(".audit-card") || document);
+    if (success) success.hidden = true;
+  });
+});
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (!link) return;
+  const href = link.getAttribute("href") || "";
+  if (href.includes("wa.me")) {
+    track("whatsapp_click", { page: window.location.pathname, href });
+  }
+  if (link.closest(".pricing-card")) {
+    track("pricing_cta_click", { page: window.location.pathname, plan: link.closest(".pricing-card")?.querySelector("h3")?.textContent?.trim() || "" });
+  }
+  if (href.includes("/audit")) {
+    track("audit_cta_click", { page: window.location.pathname, href });
+  }
 });
 
 /* Interactive live chat demo */

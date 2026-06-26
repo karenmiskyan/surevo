@@ -258,7 +258,7 @@ function ContactPage() {
       <section className="section audit-section">
         <div className="shell audit-layout">
           <div className="contact-panel"><p className="eyebrow">צור קשר</p><h2>תשובה אנושית.<br /><em>תוך יום עסקים.</em></h2><p>אפשר להתחיל באבחון החינמי או לכתוב לנו. Surevo נבנה על ידי Fast Cybers, צוות ישראלי שעובד עם חנויות וסוכנויות בכל הארץ.</p><a className="button button-primary button-lg" href="https://wa.me/972500000000"><Icon name="whatsapp" /> דברו איתנו בוואטסאפ</a><a className="text-link contact-email" href="mailto:hello@surevo.ai">hello@surevo.ai</a><div className="contact-detail"><Vero expression="wink" /><span>נבנה בישראל<br /><small>מענה אנושי תוך יום עסקים</small></span></div></div>
-          <AuditForm />
+          <AuditForm context="contact" />
         </div>
       </section>
     </SitePage>

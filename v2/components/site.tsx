@@ -91,7 +91,7 @@ function Header() {
         <nav aria-label="ניווט למובייל">
           {navLinks.map(([href, label], index) => (
             <a href={withBase(href)} key={href} aria-label={label}>
-              <span aria-hidden="true">0{index + 1}</span>{label}
+              <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>{label}
             </a>
           ))}
         </nav>
@@ -105,10 +105,21 @@ function Header() {
   );
 }
 
-export function AuditForm({ partner = false }: { partner?: boolean }) {
+export function AuditForm({
+  partner = false,
+  context,
+}: {
+  partner?: boolean;
+  context?: "audit" | "contact" | "agency";
+}) {
+  const formContext = context ?? (partner ? "agency" : "audit");
+  const consentText = partner
+    ? "אני מאשר/ת ל-Surevo לחזור אליי בוואטסאפ לגבי שותפות הסוכנות והשירות. ניתן לבקש הסרה בכל רגע."
+    : "אני מאשר/ת ל-Surevo לחזור אליי בוואטסאפ לגבי אבחון החנות והשירות. ניתן לבקש הסרה בכל רגע.";
+
   return (
     <div className="audit-card reveal">
-      <form id="auditForm" noValidate>
+      <form id="auditForm" data-lead-form data-form-context={formContext} noValidate>
         <div className="form-head">
           <span className="form-step">01</span>
           <div><h3>{partner ? "בואו נדבר על השותפות" : "בוא נכיר את החנות"}</h3><p>כמה פרטים קצרים ומתחילים.</p></div>
@@ -137,7 +148,7 @@ export function AuditForm({ partner = false }: { partner?: boolean }) {
         </label>
         <label className="consent-field">
           <input type="checkbox" name="whatsappConsent" required />
-          <span>אני מאשר/ת ל-Surevo לחזור אליי בוואטסאפ לגבי אבחון החנות והשירות. ניתן לבקש הסרה בכל רגע.</span>
+          <span>{consentText}</span>
         </label>
         <p className="consent-note">לא נשלח ספאם. נשתמש בפרטים רק כדי לחזור אליך לגבי הבקשה שלך.</p>
         <button className="button button-primary button-lg button-block" type="submit">
@@ -258,7 +269,7 @@ export function Steps({ items }: { items: Array<{ title: string; body: string }>
     <div className="steps-row">
       {items.map((item, index) => (
         <article className="step-card reveal" key={item.title}>
-          <span>0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p>
+          <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.body}</p>
         </article>
       ))}
     </div>
