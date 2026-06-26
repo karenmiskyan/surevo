@@ -1496,7 +1496,7 @@ body:hover .cursor-glow {
 
 .marquee {
   --marquee-gap: clamp(28px, 3.4vw, 64px);
-  --marquee-duration: 24s;
+  --marquee-duration: 34s;
   overflow: hidden;
   direction: ltr;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
@@ -1510,8 +1510,8 @@ body:hover .cursor-glow {
   color: #718179;
   direction: ltr;
   font-family: "DM Sans", sans-serif;
-  font-size: 21px;
-  font-weight: 700;
+  font-size: 23px;
+  font-weight: 800;
   animation: marquee var(--marquee-duration) linear infinite;
   will-change: transform;
 }
@@ -1523,7 +1523,7 @@ body:hover .cursor-glow {
 .marquee-set {
   display: flex;
   min-width: max-content;
-  min-height: 86px;
+  min-height: 96px;
   flex: 0 0 auto;
   align-items: center;
   justify-content: flex-start;
@@ -1532,45 +1532,57 @@ body:hover .cursor-glow {
 }
 
 .marquee-brand {
+  --logo-box-w: 72px;
+  --logo-box-h: 46px;
+  --logo-w: 58px;
+  --logo-h: 30px;
+  --logo-bg: rgba(255, 255, 255, .92);
+  --logo-ring: rgba(7, 35, 27, .12);
   display: inline-flex;
   align-items: center;
-  gap: 11px;
+  gap: 13px;
   color: #66766e;
   letter-spacing: -.045em;
   white-space: nowrap;
 }
 
-.marquee-brand em {
-  display: inline-grid;
-  min-width: 42px;
-  height: 42px;
-  padding-inline: 7px;
+.marquee-logo {
+  display: inline-flex;
+  width: var(--logo-box-w);
+  height: var(--logo-box-h);
+  flex: 0 0 var(--logo-box-w);
+  align-items: center;
+  justify-content: center;
+  padding: 8px 11px;
   place-items: center;
-  color: var(--mark-ink, #fff);
-  border: 1px solid var(--mark-border, rgba(7, 35, 27, .12));
-  border-radius: 13px;
-  background: var(--mark-bg, var(--forest));
-  box-shadow: 0 10px 24px rgba(7, 35, 27, .12);
-  font-family: "DM Sans", sans-serif;
-  font-size: var(--mark-size, 13px);
-  font-style: normal;
-  font-weight: 800;
-  letter-spacing: -.06em;
-  line-height: 1;
+  overflow: hidden;
+  border: 1px solid var(--logo-ring);
+  border-radius: 16px;
+  background: var(--logo-bg);
+  box-shadow: 0 12px 28px rgba(7, 35, 27, .11);
+}
+
+.marquee-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: var(--logo-w);
+  max-height: var(--logo-h);
+  object-fit: contain;
 }
 
 .marquee-brand b {
   font: inherit;
 }
 
-.brand-woo { --mark-bg: #7f54d9; --mark-size: 12px; color: #5f4c91; }
-.brand-whatsapp { --mark-bg: #23c363; color: #187c49; }
-.brand-icount { --mark-bg: #123a7a; color: #2d587a; }
-.brand-greeninvoice { --mark-bg: #0d9f76; color: #17745c; }
-.brand-cardcom { --mark-bg: #0c4b6d; color: #2b5f72; }
-.brand-hyp { --mark-bg: #121a2f; color: #4d596b; }
-.brand-pelecard { --mark-bg: #f1f7f4; --mark-border: rgba(14, 159, 110, .24); --mark-ink: var(--green-deep); color: #567166; }
-.brand-tranzilla { --mark-bg: #ffcf5d; --mark-border: rgba(162, 111, 0, .2); --mark-ink: #4b3710; color: #776846; }
+.brand-woo { --logo-box-w: 76px; --logo-w: 62px; --logo-bg: #fbf8ff; --logo-ring: rgba(127, 84, 217, .2); color: #5f4c91; }
+.brand-whatsapp { --logo-box-w: 82px; --logo-w: 70px; --logo-bg: #effff5; --logo-ring: rgba(37, 211, 102, .22); color: #187c49; }
+.brand-icount { --logo-box-w: 82px; --logo-w: 70px; --logo-bg: #fbf8ff; --logo-ring: rgba(113, 51, 217, .2); color: #7133d9; }
+.brand-greeninvoice { --logo-box-w: 118px; --logo-w: 100px; --logo-bg: #f3fff9; --logo-ring: rgba(14, 159, 110, .2); color: #17745c; }
+.brand-cardcom { --logo-box-w: 112px; --logo-w: 96px; --logo-bg: #f5fbff; --logo-ring: rgba(12, 75, 109, .18); color: #2b5f72; }
+.brand-hyp { --logo-box-w: 82px; --logo-w: 66px; --logo-bg: #f7f7ff; --logo-ring: rgba(92, 100, 255, .18); color: #4d596b; }
+.brand-pelecard { --logo-box-w: 112px; --logo-w: 96px; --logo-bg: #f4fbff; --logo-ring: rgba(24, 98, 160, .18); color: #567166; }
+.brand-tranzilla { --logo-box-w: 104px; --logo-w: 90px; --logo-bg: #fff8e7; --logo-ring: rgba(162, 111, 0, .18); color: #776846; }
 
 .marquee-set i {
   width: 5px;
@@ -3570,23 +3582,25 @@ blockquote {
   }
 
   .marquee-track {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .marquee-set {
-    min-height: 76px;
+    min-height: 82px;
     gap: 24px;
   }
 
   .marquee-brand {
-    gap: 8px;
+    --logo-box-w: 62px;
+    --logo-box-h: 40px;
+    --logo-w: 50px;
+    --logo-h: 25px;
+    gap: 9px;
   }
 
-  .marquee-brand em {
-    min-width: 34px;
-    height: 34px;
-    border-radius: 11px;
-    font-size: 11px;
+  .marquee-logo {
+    border-radius: 13px;
+    padding: 7px 9px;
   }
 
   .section {

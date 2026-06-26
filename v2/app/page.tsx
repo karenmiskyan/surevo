@@ -20,6 +20,7 @@ function getLandingMarkup() {
 
   return match[1]
     .replaceAll("../brand/logo/", withBase("/brand/logo/"))
+    .replaceAll("../brand/integrations/", withBase("/brand/integrations/"))
     .replace(/href="\/v2(\/[^"]*)?"/g, (_match, pathname = "") => `href="${BASE}${pathname || "/"}"`);
 }
 
