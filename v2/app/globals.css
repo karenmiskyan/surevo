@@ -3789,13 +3789,14 @@ blockquote {
   .bento-large,
   .bento-wide {
     display: block;
-    min-height: 270px;
+    min-height: 0;
     padding: 20px;
     grid-column: span 1;
   }
 
   .bento-large {
-    min-height: 330px;
+    display: grid;
+    gap: 20px;
   }
 
   .card-icon {
@@ -3803,27 +3804,38 @@ blockquote {
   }
 
   .integration-cloud {
-    position: absolute;
-    right: 32%;
-    bottom: 4%;
-    width: 66%;
+    position: static;
+    display: grid;
+    width: 100%;
     min-width: 0;
-    height: 58%;
-    opacity: .95;
+    height: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    opacity: 1;
   }
 
   .integration-cloud span {
-    min-width: 84px;
-    min-height: 52px;
-    padding: 10px 16px;
+    position: static;
+    min-width: 0;
+    min-height: 54px;
+    padding: 10px 12px;
     font-size: 15px;
+    animation: none;
+  }
+
+  .integration-cloud img {
+    width: 27px;
+    height: 27px;
   }
 
   .integration-cloud span:nth-child(1) {
-    font-size: 22px;
+    font-size: 16px;
   }
 
   .integration-cloud span:nth-child(5) {
+    width: min(100%, 190px);
+    justify-self: center;
+    grid-column: 1 / -1;
     font-size: 16px;
   }
 
