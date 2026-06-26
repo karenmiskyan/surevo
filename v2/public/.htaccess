@@ -4,6 +4,9 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.surevo\.ai$ [NC]
 RewriteRule ^ https://surevo.ai%{REQUEST_URI} [L,R=301]
 
+RewriteRule ^v2/?$ / [L,R=301]
+RewriteRule ^v2/(.+)$ /$1 [L,R=301]
+
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
