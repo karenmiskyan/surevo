@@ -24,6 +24,48 @@ function clean_field(array $data, string $key): string
     return is_string($value) ? trim($value) : '';
 }
 
+function encode_subject(string $subject): string
+{
+    return function_exists('mb_encode_mimeheader')
+        ? mb_encode_mimeheader($subject, 'UTF-8')
+        : '=?UTF-8?B?' . base64_encode($subject) . '?=';
+}
+
+function send_lead_email(array $lead): bool
+{
+    $recipient = filter_var(getenv('SUREVO_LEAD_EMAIL') ?: 'karenmisakyan5@gmail.com', FILTER_VALIDATE_EMAIL)
+        ?: 'karenmisakyan5@gmail.com';
+    $from = filter_var(getenv('SUREVO_MAIL_FROM') ?: 'noreply@surevo.ai', FILTER_VALIDATE_EMAIL)
+        ?: 'noreply@surevo.ai';
+    $leadName = str_replace(["\r", "\n"], ' ', (string) ($lead['name'] ?: 'לקוח חדש'));
+    $subject = encode_subject('Surevo lead חדש: ' . $leadName);
+    $body = implode("\n", [
+        'Lead חדש מ-Surevo',
+        '',
+        'שם: ' . $lead['name'],
+        'טלפון: ' . $lead['phone'],
+        'חנות: ' . $lead['store'],
+        'מחזור: ' . $lead['revenue'],
+        'מקור: ' . $lead['source'],
+        'עמוד: ' . $lead['page'],
+        'זמן: ' . $lead['submittedAt'],
+        'IP: ' . ($lead['ip'] ?? ''),
+        '',
+        'Consent:',
+        $lead['consentText'] ?: 'whatsappConsent=true',
+        '',
+        'Lead ID: ' . $lead['id'],
+    ]);
+    $headers = implode("\r\n", [
+        'From: Surevo Leads <' . $from . '>',
+        'Reply-To: ' . $from,
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+    ]);
+
+    return @mail($recipient, $subject, $body, $headers, '-f' . $from);
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond(405, ['ok' => false, 'error' => 'method_not_allowed']);
 }
@@ -78,7 +120,7 @@ try {
         throw new RuntimeException('lead_write_failed');
     }
 
-    $delivered = false;
+    $webhookDelivered = false;
     $webhook = getenv('SUREVO_LEAD_WEBHOOK_URL') ?: '';
     if ($webhook !== '' && function_exists('curl_init')) {
         $ch = curl_init($webhook);
@@ -93,12 +135,18 @@ try {
         curl_exec($ch);
         $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         curl_close($ch);
-        $delivered = $status >= 200 && $status < 300;
+        $webhookDelivered = $status >= 200 && $status < 300;
     }
 
-    respond(200, ['ok' => true, 'id' => $id, 'delivered' => $delivered]);
+    $emailDelivered = send_lead_email($lead);
+
+    respond(200, [
+        'ok' => true,
+        'id' => $id,
+        'delivered' => $webhookDelivered || $emailDelivered,
+        'emailDelivered' => $emailDelivered,
+    ]);
 } catch (Throwable $error) {
     error_log('Surevo lead submit failed: ' . $error->getMessage());
     respond(500, ['ok' => false, 'error' => 'lead_submit_failed']);
 }
-
