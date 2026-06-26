@@ -90,9 +90,9 @@ function AuditPage() {
 
 function PricingPage() {
   const plans = [
-    { name: "לאנץ׳", en: "Launch", setup: "הקמה ₪1,490", price: "₪390", text: "לחנות שמתחילה להפוך שיחות למכירות.", features: ["אתר + וואטסאפ", "סנכרון קטלוג ומלאי", "דוח ביצועים חודשי"] },
-    { name: "צמיחה", en: "Growth", setup: "הקמה ₪2,900", price: "₪890", text: "הבחירה של חנויות שרוצות לגדול ברצינות.", features: ["כל מה שב-Launch", "iCount, Greeninvoice, Cardcom", "הצלת סלים ו-upsell", "שיחת אופטימיזציה חודשית"], featured: true },
-    { name: "מותג", en: "Scale", setup: "הקמה מותאמת", price: "₪1,490", text: "למותגים, ריבוי חנויות וסוכנויות.", features: ["Multi-store", "מנהל לקוח ייעודי", "API ו-SLA בעדיפות", "התאמות מתקדמות"] },
+    { name: "לאנץ׳", label: "מסלול פתיחה", setup: "הקמה ₪1,490", price: "₪390", text: "לחנות שמתחילה להפוך שיחות למכירות.", features: ["אתר + וואטסאפ", "סנכרון קטלוג ומלאי", "דוח ביצועים חודשי"] },
+    { name: "צמיחה", label: "מסלול צמיחה", setup: "הקמה ₪2,900", price: "₪890", text: "הבחירה של חנויות שרוצות לגדול ברצינות.", features: ["כל מה שבלאנץ׳", "iCount, Greeninvoice, Cardcom", "הצלת סלים ו-upsell", "שיחת אופטימיזציה חודשית"], featured: true },
+    { name: "סקייל", label: "מסלול מותגים", setup: "הקמה מותאמת", price: "₪1,490", text: "למותגים, ריבוי חנויות וסוכנויות.", features: ["ריבוי חנויות", "מנהל לקוח ייעודי", "API ו-SLA בעדיפות", "התאמות מתקדמות"] },
   ];
   return (
     <SitePage>
@@ -104,7 +104,7 @@ function PricingPage() {
             {plans.map((plan) => (
               <article className={`pricing-card reveal ${plan.featured ? "featured" : ""}`} key={plan.name}>
                 {plan.featured && <span className="popular">הכי פופולרי</span>}
-                <small>{plan.en}</small><h3>{plan.name}</h3><p>{plan.text}</p>
+                <small>{plan.label}</small><h3>{plan.name}</h3><p>{plan.text}</p>
                 <div className="setup">{plan.setup}</div><strong>{plan.price}<i>/חודש</i></strong>
                 <ul>{plan.features.map((feature) => <li key={feature}><Icon name="check" />{feature}</li>)}</ul>
                 <a className={`button button-block ${plan.featured ? "button-primary" : "button-outline"}`} href={withBase("/audit")}>קבל אבחון חינם <Icon name="arrow" /></a>
@@ -203,7 +203,13 @@ function ResultsPage() {
 function AgenciesPage() {
   return (
     <SitePage>
-      <PageHero eyebrow="Surevo for Agencies" title={<>AI מכירות ללקוחות שלכם.<br /><em>בלי לבנות צוות חדש.</em></>} lead="מתאים לסוכנויות שמנהלות לפחות 5 חנויות WooCommerce פעילות. אתם מביאים את הלקוח והקשר. אנחנו מטפלים בהקמה, חיבורים, אימון וריפורטינג." />
+      <PageHero
+        eyebrow="Surevo for Agencies"
+        title={<>AI מכירות ללקוחות שלכם.<br /><em>בלי לבנות צוות חדש.</em></>}
+        lead="מתאים לסוכנויות שמנהלות לפחות 5 חנויות WooCommerce פעילות. אתם מביאים את הלקוח והקשר. אנחנו מטפלים בהקמה, חיבורים, אימון וריפורטינג."
+        primaryCta={{ label: "דברו איתנו על שותפות", href: "/agencies#partner" }}
+        secondaryCta={{ label: "ראו איך ורו עובד", href: "/how-it-works" }}
+      />
       <section className="section section-paper"><div className="shell"><SectionHeading eyebrow="שותפות שחוזרת כל חודש" title={<>שירות חדש.<br /><em>הכנסה חוזרת.</em></>} /><FeatureGrid items={[
         { icon: "chart", title: "עד 30% עמלה חוזרת", body: "כל לקוח פעיל מוסיף הכנסה חודשית יציבה לסוכנות." },
         { icon: "shield", title: "אנחנו מטפלים בטכנולוגיה", body: "הקמה, חיבורים, אימון ושיפור נשארים אצל צוות Surevo." },
@@ -227,7 +233,7 @@ function AgenciesPage() {
           </div>
         </div>
       </section>
-      <section className="section audit-section"><div className="shell audit-layout"><div className="audit-copy"><p className="eyebrow">בואו נדבר שותפות</p><h2>כמה לקוחות יכולים<br /><em>להתחיל למכור יותר?</em></h2><p>ספרו לנו על הסוכנות ונחזור עם מודל שמתאים לתיק הלקוחות שלכם.</p></div><AuditForm partner /></div></section>
+      <section className="section audit-section" id="partner"><div className="shell audit-layout"><div className="audit-copy"><p className="eyebrow">בואו נדבר שותפות</p><h2>כמה לקוחות יכולים<br /><em>להתחיל למכור יותר?</em></h2><p>ספרו לנו על הסוכנות ונחזור עם מודל שמתאים לתיק הלקוחות שלכם.</p></div><AuditForm partner /></div></section>
     </SitePage>
   );
 }

@@ -13,6 +13,8 @@ type LeadPayload = {
   revenue?: string;
   whatsappConsent?: boolean;
   consentText?: string;
+  consentTimestamp?: string;
+  consentSourcePage?: string;
 };
 
 const requiredFields: Array<keyof LeadPayload> = ["store", "name", "phone", "revenue"];
@@ -33,7 +35,18 @@ function normalizeLead(body: LeadPayload) {
     revenue: clean(body.revenue),
     whatsappConsent: body.whatsappConsent === true,
     consentText: clean(body.consentText),
+    consentTimestamp: clean(body.consentTimestamp) || new Date().toISOString(),
+    consentSourcePage: clean(body.consentSourcePage) || clean(body.page),
   };
+}
+
+function validStoreUrl(store: string) {
+  try {
+    const url = new URL(store.includes("://") ? store : `https://${store}`);
+    return url.hostname.includes(".");
+  } catch {
+    return false;
+  }
 }
 
 async function persistLead(lead: ReturnType<typeof normalizeLead>) {
@@ -75,6 +88,10 @@ export async function POST(request: Request) {
 
   if (missing.length || !lead.whatsappConsent) {
     return Response.json({ ok: false, error: "missing_required", missing }, { status: 400 });
+  }
+
+  if (!validStoreUrl(lead.store)) {
+    return Response.json({ ok: false, error: "invalid_store_url" }, { status: 400 });
   }
 
   const digits = lead.phone.replace(/\D/g, "");

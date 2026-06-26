@@ -18,6 +18,33 @@ function track(eventName, data = {}) {
   window.dispatchEvent(new CustomEvent("surevo:track", { detail: payload }));
 }
 
+function normalizeLeadSource(source) {
+  if (source === "homepage") return "store_audit";
+  if (source === "audit") return "store_audit";
+  if (source === "agency") return "agency_partner";
+  if (source === "contact") return "contact";
+  return source || "store_audit";
+}
+
+function normalizeRevenueRange(value) {
+  return value
+    .replace(/₪/g, "ils")
+    .replace(/[^\p{L}\p{N}]+/gu, "_")
+    .replace(/^_+|_+$/g, "")
+    .toLowerCase();
+}
+
+function trackLeadEvent(eventName, payload, extra = {}) {
+  track(eventName, {
+    page: payload.page,
+    form_type: normalizeLeadSource(payload.source),
+    revenue_range: normalizeRevenueRange(payload.revenue),
+    consent: payload.whatsappConsent,
+    source: payload.source,
+    ...extra,
+  });
+}
+
 const now = () => new Intl.DateTimeFormat("he-IL", {
   hour: "2-digit",
   minute: "2-digit",
@@ -452,6 +479,8 @@ function validateStoreUrl(value) {
 
 function collectLeadPayload(form) {
   const consent = $('[name="whatsappConsent"]', form);
+  const consentText = consent?.closest(".consent-field")?.textContent.replace(/\s+/g, " ").trim() || "";
+  const consentTimestamp = consent?.checked ? new Date().toISOString() : "";
   return {
     source: getLeadFormContext(form),
     page: window.location.pathname,
@@ -460,7 +489,9 @@ function collectLeadPayload(form) {
     phone: $('[name="phone"]', form)?.value.trim() || "",
     revenue: $('[name="revenue"]', form)?.value.trim() || "",
     whatsappConsent: Boolean(consent?.checked),
-    consentText: consent?.closest(".consent-field")?.textContent.replace(/\s+/g, " ").trim() || "",
+    consentText,
+    consentTimestamp,
+    consentSourcePage: window.location.pathname,
   };
 }
 
@@ -489,13 +520,15 @@ async function postLead(payload) {
 }
 
 async function submitLeadForm(form) {
+  if (form.dataset.submitting === "true") return;
+  form.dataset.submitting = "true";
   const button = $('button[type="submit"]', form);
   const originalLabel = button?.innerHTML;
   const card = form.closest(".audit-card");
   const success = $(".form-success", card || document);
   const payload = collectLeadPayload(form);
 
-  track("form_submit_attempt", { source: payload.source, page: payload.page });
+  trackLeadEvent("form_submit_attempt", payload);
   if (button) {
     button.disabled = true;
     button.innerHTML = "<span>שולח...</span>";
@@ -507,16 +540,23 @@ async function submitLeadForm(form) {
     form.hidden = true;
     if (success) success.hidden = false;
     showToast("הבקשה התקבלה. נחזור אליך בוואטסאפ");
-    track("form_submit", { source: payload.source, page: payload.page, lead_id: result.id });
-    if (["homepage", "audit", "contact"].includes(payload.source)) {
-      track("audit_submit", { source: payload.source, page: payload.page, lead_id: result.id });
+    trackLeadEvent("form_submit", payload, { lead_id: result.id });
+    if (["homepage", "audit"].includes(payload.source)) {
+      trackLeadEvent("audit_submit", payload, { lead_id: result.id });
     }
-    track("thank_you", { source: payload.source, page: payload.page, lead_id: result.id });
+    if (payload.source === "agency") {
+      trackLeadEvent("agency_submit", payload, { lead_id: result.id });
+    }
+    if (payload.source === "contact") {
+      trackLeadEvent("contact_submit", payload, { lead_id: result.id });
+    }
+    trackLeadEvent("thank_you_view", payload, { lead_id: result.id });
   } catch (error) {
     console.error("Lead form submit failed", error);
     showToast("השליחה לא הצליחה. אפשר לנסות שוב או לפנות בוואטסאפ");
-    track("form_submit_error", { source: payload.source, page: payload.page });
+    trackLeadEvent("form_submit_error", payload);
   } finally {
+    form.dataset.submitting = "false";
     if (button) {
       button.disabled = false;
       button.innerHTML = originalLabel;
@@ -561,6 +601,15 @@ $$("[data-lead-form]").forEach((form) => {
   });
 
   $$("input, select", form).forEach((field) => {
+    field.addEventListener("focus", () => {
+      if (form.dataset.formStarted) return;
+      form.dataset.formStarted = "true";
+      track("form_start", {
+        page: window.location.pathname,
+        form_type: normalizeLeadSource(getLeadFormContext(form)),
+        source: getLeadFormContext(form),
+      });
+    });
     field.addEventListener("input", () => field.classList.remove("invalid"));
     field.addEventListener("change", () => field.classList.remove("invalid"));
   });
@@ -587,6 +636,9 @@ document.addEventListener("click", (event) => {
   if (href.includes("/audit")) {
     track("audit_cta_click", { page: window.location.pathname, href });
   }
+  if (link.closest(".hero") || link.closest(".interior-hero")) {
+    track("hero_cta_click", { page: window.location.pathname, href, label: link.textContent?.trim() || "" });
+  }
 });
 
 /* Interactive live chat demo */
@@ -599,10 +651,12 @@ let hasGreeted = false;
 
 function openChat() {
   if (!liveChat || !chatLauncher) return;
+  const wasOpen = liveChat.classList.contains("open");
   liveChat.classList.add("open");
   liveChat.setAttribute("aria-hidden", "false");
   chatLauncher.setAttribute("aria-expanded", "true");
   document.body.classList.add("chat-open");
+  if (!wasOpen) track("chat_open", { page: window.location.pathname });
 
   if (!hasGreeted) {
     hasGreeted = true;
@@ -618,6 +672,17 @@ function closeChat() {
   liveChat.setAttribute("aria-hidden", "true");
   chatLauncher.setAttribute("aria-expanded", "false");
   document.body.classList.remove("chat-open");
+}
+
+function openAuditFlow(source = "chat") {
+  track("hero_cta_click", { page: window.location.pathname, href: `${basePath}/audit`, source });
+  const auditSection = $("#audit");
+  if (auditSection) {
+    auditSection.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    setTimeout(() => $('[name="store"]', auditSection)?.focus(), reducedMotion ? 50 : 520);
+    return;
+  }
+  window.location.assign(`${basePath}/audit`);
 }
 
 async function appendLiveReply(reply) {
@@ -636,6 +701,10 @@ async function appendLiveReply(reply) {
     await wait(420);
     appendProduct(liveChatMessages, response.product);
   }
+  if (response.action === "audit") {
+    await wait(520);
+    openAuditFlow("chat_quick_reply");
+  }
 }
 
 function getLiveReply(message) {
@@ -653,7 +722,10 @@ function getLiveReply(message) {
     return "אנחנו מחברים אותי לקטלוג, למלאי ולמערכות התשלום שלך. משם אני עונה ללקוחות באתר ובוואטסאפ, ממליץ על מוצרים ומוביל להזמנה. הצוות שלנו מנהל ומשפר אותי בכל חודש.";
   }
   if (text.includes("אבחון") || text.includes("פגישה") || text.includes("קבע") || text.includes("דברו")) {
-    return "בשמחה. גלול לטופס האבחון, השאר את כתובת החנות והוואטסאפ שלך ונחזור אליך בתוך 24 שעות עם תובנות ראשונות.";
+    return {
+      text: "בשמחה. אני פותח לך עכשיו את טופס האבחון. השאר את כתובת החנות והוואטסאפ שלך ונחזור בתוך 24 שעות עם תובנות ראשונות.",
+      action: "audit",
+    };
   }
   if (text.includes("עברית") || text.includes("שפה")) {
     return "כן. נבניתי במיוחד לחנויות ישראליות: עברית יומיומית, שקלים, משלוחים מקומיים והקצב שבו לקוחות באמת כותבים בוואטסאפ.";
@@ -673,6 +745,7 @@ function sendLiveMessage(text) {
   if (!cleaned) return;
   liveChatMessages.append(bubble(cleaned, "user"));
   scrollMessages(liveChatMessages);
+  track("chat_message_sent", { page: window.location.pathname, message_type: "user" });
   appendLiveReply(getLiveReply(cleaned));
 }
 
@@ -689,7 +762,10 @@ liveChatForm?.addEventListener("submit", (event) => {
 const quickReplies = $("#quickReplies");
 if (quickReplies) {
   $$("button", quickReplies).forEach((button) => {
-    button.addEventListener("click", () => sendLiveMessage(button.textContent));
+    button.addEventListener("click", () => {
+      track("chat_quick_reply_click", { page: window.location.pathname, label: button.textContent?.trim() || "" });
+      sendLiveMessage(button.textContent);
+    });
   });
 }
 

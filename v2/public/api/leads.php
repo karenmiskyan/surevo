@@ -24,6 +24,13 @@ function clean_field(array $data, string $key): string
     return is_string($value) ? trim($value) : '';
 }
 
+function valid_store_url(string $store): bool
+{
+    $candidate = str_contains($store, '://') ? $store : 'https://' . $store;
+    $host = parse_url($candidate, PHP_URL_HOST);
+    return is_string($host) && str_contains($host, '.');
+}
+
 function encode_subject(string $subject): string
 {
     return function_exists('mb_encode_mimeheader')
@@ -53,6 +60,8 @@ function send_lead_email(array $lead): bool
         '',
         'Consent:',
         $lead['consentText'] ?: 'whatsappConsent=true',
+        'Consent timestamp: ' . ($lead['consentTimestamp'] ?? ''),
+        'Consent source page: ' . ($lead['consentSourcePage'] ?? ''),
         '',
         'Lead ID: ' . $lead['id'],
     ]);
@@ -88,6 +97,10 @@ try {
         respond(400, ['ok' => false, 'error' => 'missing_required']);
     }
 
+    if (!valid_store_url($store)) {
+        respond(400, ['ok' => false, 'error' => 'invalid_store_url']);
+    }
+
     $phoneDigits = preg_replace('/\D+/', '', $phone) ?? '';
     if (strlen($phoneDigits) < 8) {
         respond(400, ['ok' => false, 'error' => 'invalid_phone']);
@@ -105,6 +118,8 @@ try {
         'revenue' => $revenue,
         'whatsappConsent' => true,
         'consentText' => clean_field($data, 'consentText'),
+        'consentTimestamp' => clean_field($data, 'consentTimestamp') ?: gmdate('c'),
+        'consentSourcePage' => clean_field($data, 'consentSourcePage') ?: clean_field($data, 'page'),
         'ip' => $_SERVER['REMOTE_ADDR'] ?? null,
         'userAgent' => substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 500),
     ];

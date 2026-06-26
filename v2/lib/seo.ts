@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://surevo.ai";
+const normalizedSiteUrl = siteUrl.endsWith("/") ? siteUrl : `${siteUrl}/`;
 
 const ogImagePath = "/og/surevo-whatsapp-sales-agent-he.png";
-const ogImageUrl = `${siteUrl}${ogImagePath}`;
+const ogImageUrl = new URL(ogImagePath, normalizedSiteUrl).toString();
 
 export const sharedOg = {
   image: ogImageUrl,
@@ -17,7 +18,7 @@ export const pageSeo = {
     path: "/",
     title: "Surevo | סוכן מכירות לוואטסאפ לחנויות WooCommerce בישראל",
     description:
-      "Surevo הוא סוכן מכירות מנוהל לאתר ולוואטסאפ של חנויות WooCommerce בישראל. עונה בעברית טבעית לפי קטלוג, מלאי ומדיניות החנות — ומעביר לנציג כשצריך. קבלו אבחון מכירות חינם תוך 24 שעות.",
+      "Surevo הוא סוכן מכירות מנוהל לאתר ולוואטסאפ של חנויות WooCommerce בישראל. עונה בעברית טבעית לפי קטלוג, מלאי ומדיניות החנות — ומעביר לנציג כשצריך.",
     ogTitle: "Surevo | סוכן מכירות לוואטסאפ לחנויות WooCommerce בישראל",
     ogDescription:
       "המוכר הדיגיטלי שלך לאתר ולוואטסאפ. Surevo עונה לפי המידע האמיתי של החנות, מוביל שיחות להזמנה ומעביר לנציג כשצריך.",
@@ -101,8 +102,13 @@ export const pageSeo = {
 
 export type SeoPage = keyof typeof pageSeo;
 
+function canonicalPath(path: string) {
+  if (path === "/") return "/";
+  return path.endsWith("/") ? path : `${path}/`;
+}
+
 export function absoluteUrl(path: string) {
-  return new URL(path, siteUrl).toString();
+  return new URL(canonicalPath(path), normalizedSiteUrl).toString();
 }
 
 export function getPageMetadata(page: SeoPage, options: { noindex?: boolean } = {}): Metadata {

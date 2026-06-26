@@ -221,12 +221,19 @@ export function PageHero({
   title,
   lead,
   children,
+  primaryCta,
+  secondaryCta,
 }: {
   eyebrow: string;
   title: ReactNode;
   lead: string;
   children?: ReactNode;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
 }) {
+  const primary = primaryCta ?? { label: "קבל אבחון מכירות חינם", href: "/audit" };
+  const secondary = secondaryCta ?? { label: "דברו איתנו", href: "/contact" };
+
   return (
     <section className="interior-hero">
       <div className="interior-aurora" /><div className="hero-grid" aria-hidden="true" />
@@ -236,8 +243,8 @@ export function PageHero({
           <h1>{title}</h1>
           <p>{lead}</p>
           <div className="interior-actions">
-            <a className="button button-primary button-lg magnetic" href={withBase("/audit")}>קבל אבחון מכירות חינם <Icon name="arrow" /></a>
-            <a className="button button-ghost button-lg" href={withBase("/contact")}>דברו איתנו</a>
+            <a className="button button-primary button-lg magnetic" href={withBase(primary.href)}>{primary.label} <Icon name="arrow" /></a>
+            <a className="button button-ghost button-lg" href={withBase(secondary.href)}>{secondary.label}</a>
           </div>
         </div>
         <div className="interior-hero-vero"><Vero expression="talking" size="xl" /><span>ורו מוכן לעבוד</span></div>
