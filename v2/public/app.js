@@ -3,7 +3,12 @@ const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)]
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, reducedMotion ? Math.min(ms, 80) : ms));
 const basePath = window.location.pathname.startsWith("/v2") ? "/v2" : "";
-const leadEndpoint = `${basePath}/api/leads`;
+const leadEndpoints = [...new Set([
+  `${basePath}/api/leads`,
+  `${basePath}/api/leads.php`,
+  "/api/leads",
+  "/api/leads.php",
+])];
 
 function track(eventName, data = {}) {
   const payload = { event: eventName, ...data };
@@ -459,6 +464,30 @@ function collectLeadPayload(form) {
   };
 }
 
+async function postLead(payload) {
+  let lastError;
+
+  for (const endpoint of leadEndpoints) {
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (response.ok && result.ok) return result;
+
+      lastError = new Error(result.error || `lead_submit_failed_${response.status}`);
+      if (![404, 405].includes(response.status)) break;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError || new Error("lead_submit_failed");
+}
+
 async function submitLeadForm(form) {
   const button = $('button[type="submit"]', form);
   const originalLabel = button?.innerHTML;
@@ -473,13 +502,7 @@ async function submitLeadForm(form) {
   }
 
   try {
-    const response = await fetch(leadEndpoint, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok || !result.ok) throw new Error(result.error || "lead_submit_failed");
+    const result = await postLead(payload);
 
     form.hidden = true;
     if (success) success.hidden = false;
