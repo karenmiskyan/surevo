@@ -74,7 +74,6 @@ function Header() {
             {navLinks.map(([href, label]) => <a href={withBase(href)} key={href}>{label}</a>)}
           </nav>
           <div className="nav-actions">
-            <button className="language-switch" type="button" aria-label="Switch language">EN</button>
             <a className="button button-sm button-primary magnetic" href={withBase("/audit")}>
               <span>קבל אבחון חינם</span><Icon name="arrow" />
             </a>
@@ -134,6 +133,11 @@ export function AuditForm({ partner = false }: { partner?: boolean }) {
             <option>{partner ? "מעל 40 לקוחות" : "מעל ₪1,000,000"}</option>
           </select>
         </label>
+        <label className="consent-field">
+          <input type="checkbox" name="whatsappConsent" required />
+          <span>אני מאשר/ת ל-Surevo לחזור אליי בוואטסאפ לגבי אבחון החנות והשירות. ניתן לבקש הסרה בכל רגע.</span>
+        </label>
+        <p className="consent-note">לא נשלח ספאם. נשתמש בפרטים רק כדי לחזור אליך לגבי הבקשה שלך.</p>
         <button className="button button-primary button-lg button-block" type="submit">
           <span>{partner ? "דברו איתי על שותפות" : "שלח לי אבחון חינם"}</span><Icon name="arrow" />
         </button>

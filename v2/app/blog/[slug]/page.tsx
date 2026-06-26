@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Icon, SitePage, Vero, withBase } from "../../../components/site";
 import { getPost, posts } from "../../../lib/blog";
+import { absoluteUrl, sharedOg } from "../../../lib/seo";
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -10,7 +11,29 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
-  return post ? { title: `${post.title} | Surevo`, description: post.excerpt } : {};
+  if (!post) return {};
+  const url = absoluteUrl(`/blog/${post.slug}`);
+  return {
+    title: `${post.title} | Surevo`,
+    description: post.excerpt,
+    alternates: { canonical: url },
+    robots: { index: false, follow: true },
+    openGraph: {
+      type: "article",
+      locale: "he_IL",
+      url,
+      siteName: "Surevo",
+      title: `${post.title} | Surevo`,
+      description: post.excerpt,
+      images: [{ url: sharedOg.image, width: sharedOg.width, height: sharedOg.height, alt: sharedOg.alt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | Surevo`,
+      description: post.excerpt,
+      images: [sharedOg.image],
+    },
+  };
 }
 
 export default async function BlogArticle({ params }: { params: Promise<{ slug: string }> }) {

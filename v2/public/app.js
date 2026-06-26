@@ -332,6 +332,11 @@ const scenarios = {
     { from: "user", text: "מעולה, ממשיכה להזמנה עכשיו." },
     { type: "product", product: "calm", autoAdd: true },
   ],
+  handoff: [
+    { from: "user", text: "יש אחריות לשנתיים על הדגם הזה?" },
+    { from: "bot", text: "אני לא רוצה להטעות. אני מעביר אותך לנציג שיבדוק את האחריות לפי הדגם הספציפי." },
+    { from: "bot", text: "העברתי את כל ההקשר לצוות, כדי שלא תצטרך לחזור על השאלה." },
+  ],
 };
 
 const consoleMessages = $("#consoleMessages");
@@ -421,7 +426,7 @@ auditForm?.addEventListener("submit", (event) => {
   let valid = true;
 
   required.forEach((field) => {
-    const empty = !field.value.trim();
+    const empty = field.type === "checkbox" ? !field.checked : !field.value.trim();
     field.classList.toggle("invalid", empty);
     valid = valid && !empty;
   });
@@ -446,6 +451,7 @@ auditForm?.addEventListener("submit", (event) => {
 if (auditForm) {
   $$("input, select", auditForm).forEach((field) => {
     field.addEventListener("input", () => field.classList.remove("invalid"));
+    field.addEventListener("change", () => field.classList.remove("invalid"));
   });
 }
 
@@ -558,11 +564,6 @@ if (quickReplies) {
     button.addEventListener("click", () => sendLiveMessage(button.textContent));
   });
 }
-
-/* Small polish interactions */
-$(".language-switch")?.addEventListener("click", () => {
-  showToast("הגרסה האנגלית תצטרף בקרוב");
-});
 
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;

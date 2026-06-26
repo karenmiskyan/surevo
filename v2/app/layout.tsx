@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { getPageMetadata, siteUrl } from "../lib/seo";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "/v2";
 
 export const metadata: Metadata = {
-  title: "Surevo | המוכר הדיגיטלי שלך. תמיד ער.",
-  description:
-    "Surevo - סוכן המכירות החכם שמוכר עבור החנות שלך בוואטסאפ ובאתר, 24/7.",
+  ...getPageMetadata("home"),
+  metadataBase: new URL(siteUrl),
   icons: {
     icon: `${BASE}/brand/logo/surevo-appicon.svg`,
   },

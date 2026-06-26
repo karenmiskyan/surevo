@@ -1,8 +1,10 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import Script from "next/script";
+import { getPageMetadata } from "../lib/seo";
 
 export const dynamic = "force-static";
+export const metadata = getPageMetadata("home");
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "/v2";
 

@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Icon, PageHero, SectionHeading, SitePage, withBase } from "../../components/site";
 import { posts } from "../../lib/blog";
+import { getPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "בלוג | Surevo",
-  description: "מדריכים ותובנות על מכירות בוואטסאפ, WooCommerce וחוויית לקוח ישראלית.",
-};
+export const metadata: Metadata = getPageMetadata("blog");
 
 export default function BlogPage() {
   const [featured, ...rest] = posts;

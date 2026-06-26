@@ -11,13 +11,14 @@ import {
   Vero,
   withBase,
 } from "../../components/site";
+import { getPageMetadata, pageSeo, type SeoPage } from "../../lib/seo";
 
 const pages = {
   audit: ["אבחון מכירות חינם", "נגלה איפה המכירות בורחות ונראה איך ורו יכול להחזיר אותן."],
   pricing: ["תמחור", "שלושה מסלולים פשוטים לשירות מכירות מנוהל."],
   agent: ["הסוכן", "תכירו את ורו, איש המכירות הדיגיטלי של החנות."],
   "how-it-works": ["איך זה עובד", "אנחנו מתקינים ומנהלים. ורו מוכר."],
-  results: ["תוצאות", "מכירות אמיתיות, בשקלים, מתוך שיחות אמיתיות."],
+  results: ["תוצאות", "כך נמדוד אם ורו באמת מחזיר הכנסה לחנות."],
   agencies: ["לסוכנויות", "הוסיפו שירות AI מנוהל ללקוחות שלכם."],
   about: ["אודות", "נבנה בישראל לחנויות שמוכרות בישראל."],
   contact: ["צור קשר", "בואו נדבר על החנות שלכם."],
@@ -32,7 +33,7 @@ const coreFeatures = [
   { icon: "plug", title: "מתחבר למה שכבר עובד", body: "WooCommerce, וואטסאפ, מלאי, תשלומים וחשבוניות ישראליות במקום אחד." },
   { icon: "message", title: "עברית שנשמעת טבעית", body: "ורו עונה ישיר, חם ומקומי. לא כמו כלי שתורגם מחו״ל." },
   { icon: "chart", title: "מוביל להזמנה", body: "המלצות, טיפול בהתנגדויות, upsell וקישור תשלום ברגע הנכון." },
-  { icon: "users", title: "יודע להעביר לאדם", body: "כששיחה צריכה מגע אנושי, הצוות מקבל אותה עם כל ההקשר." },
+  { icon: "users", title: "יודע להעביר לאדם", body: "כשאין מידע בטוח או צריך שיקול דעת אנושי, הצוות מקבל את השיחה עם כל ההקשר." },
   { icon: "clock", title: "תמיד ער", body: "לקוחות מקבלים תשובה גם בלילה, בסוף השבוע ובשעות עומס." },
   { icon: "shield", title: "מנוהל על ידינו", body: "אנחנו מתקינים, בודקים ומשפרים. אתם רואים את ההכנסות." },
 ];
@@ -41,6 +42,13 @@ const onboarding = [
   { title: "מחברים", body: "קטלוג, מלאי, תשלומים, חשבוניות וערוצי השיחה מתחברים למערכת אחת." },
   { title: "מלמדים", body: "אנחנו בונים לוורו שפת מכירה, תשובות והמלצות שמתאימות למותג שלכם." },
   { title: "עולים לאוויר", body: "אחרי בדיקות אמיתיות ורו מתחיל למכור, ואנחנו ממשיכים לשפר כל חודש." },
+];
+
+const workflow = [
+  { title: "מחברים את WooCommerce והמידע החשוב", body: "קטלוג, מלאי, מדיניות משלוחים, החזרות, תשלומים וחשבוניות מתחברים לפני שוורו מדבר עם לקוחות." },
+  { title: "מגדירים מתי ורו עונה ומתי הוא מעביר לנציג", body: "שאלות בטוחות מקבלות תשובה מיידית. שאלות רגישות, חסרות מידע או חריגות עוברות לאדם." },
+  { title: "בודקים שיחות אמיתיות לפני עלייה לאוויר", body: "מריצים תרחישי קנייה, התנגדויות, מלאי, משלוחים ואחריות כדי לוודא שהשפה והתשובות נכונות." },
+  { title: "עולים לאוויר ומודדים", body: "אחרי ההשקה מודדים הכנסות, זמן תגובה ושיחות שהתקדמו להזמנה, ומשפרים בכל חודש." },
 ];
 
 function AuditPage() {
@@ -60,7 +68,10 @@ function AuditPage() {
             </ul>
             <div className="conversion-proof"><Vero expression="wink" /><span>בלי התחייבות · תשובה אנושית · נבנה בישראל</span></div>
           </div>
-          <AuditForm />
+          <div className="form-stack">
+            <AuditForm />
+            <p className="audit-form-note">האבחון אינו מחייב חיבור למערכות. נבדוק את החנות מבחוץ ונחזור עם תובנות ראשוניות.</p>
+          </div>
         </div>
       </section>
       <section className="section section-paper">
@@ -105,6 +116,24 @@ function PricingPage() {
       <section className="section section-mint">
         <div className="shell"><SectionHeading eyebrow="הקמה Done-for-you" title={<>אתם לא צריכים<br /><em>ללמוד עוד מערכת.</em></>} lead="כל מסלול כולל התקנה אמיתית על ידי הצוות שלנו." /><Steps items={onboarding} /></div>
       </section>
+      <section className="section section-paper">
+        <div className="shell faq-layout">
+          <SectionHeading eyebrow="שאלות על תמחור" title={<>ברור מראש.<br /><em>בלי אותיות קטנות בהפתעה.</em></>} lead="האחריות וההקמה נקבעות בהצעה המסחרית ובתנאי השימוש." />
+          <div className="faq-list reveal">
+            {[
+              ["האם יש התחייבות?", "לא. מתחילים חודש-חודש."],
+              ["מה כוללת ההקמה?", "חיבור ראשוני, בדיקות, התאמת שפת מכירה ודוח פתיחה."],
+              ["מה קורה אם זה לא מתאים?", "ב-30 הימים הראשונים נמדוד יחד אם השירות מחזיר את ההשקעה. אם לא, נפעל לפי אחריות ההקמה שמופיעה בהצעה המסחרית."],
+              ["האם כל החיבורים כלולים?", "חיבורים בסיסיים כלולים לפי המסלול. חיבורים מורכבים או התאמות מיוחדות יתומחרו לפני תחילת העבודה."],
+            ].map(([question, answer], index) => (
+              <article className={`faq-item ${index === 0 ? "open" : ""}`} key={question}>
+                <button type="button" aria-expanded={index === 0 ? "true" : "false"}><span>{question}</span><Icon name="chevron" /></button>
+                <div className="faq-answer" aria-hidden={index === 0 ? "false" : "true"}><p>{answer}</p></div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </SitePage>
   );
 }
@@ -112,7 +141,7 @@ function PricingPage() {
 function AgentPage() {
   return (
     <SitePage>
-      <PageHero eyebrow="תכירו את ורו" title={<>יש לו פרצוף.<br /><em>ויש לו יעד מכירות.</em></>} lead="ורו הוא סוכן מכירות שמכיר כל מוצר, מדבר כמו לקוח ישראלי ויודע מתי לעזור, להמליץ ולסגור." />
+      <PageHero eyebrow="תכירו את ורו" title={<>יש לו פרצוף.<br /><em>ויש לו יעד מכירות.</em></>} lead="ורו יודע למכור, אבל גם יודע לעצור. כשאין מידע בטוח — הוא מעביר לנציג במקום לנחש." />
       <section className="section section-paper"><div className="shell"><SectionHeading eyebrow="לא FAQ bot" title={<>סוכן שיודע<br /><em>לנהל שיחה.</em></>} lead="מאחורי הפנים הידידותיות יש מנוע מכירה שמחובר לעסק שלכם." /><FeatureGrid items={coreFeatures} /></div></section>
       <section className="section section-mint">
         <div className="shell agent-language">
@@ -141,32 +170,32 @@ function AgentPage() {
 function HowPage() {
   return (
     <SitePage>
-      <PageHero eyebrow="שירות מנוהל מתחילתו ועד סופו" title={<>שלושה צעדים.<br /><em>ומתחילים למכור.</em></>} lead="אין הטמעה ארוכה ואין מערכת חדשה ללמוד. אנחנו עושים את העבודה מאחורי הקלעים." />
-      <section className="section section-paper"><div className="shell"><SectionHeading eyebrow="איך זה עובד" title={<>מחיבור ראשון<br /><em>לשיחה שסוגרת.</em></>} /><Steps items={onboarding} /></div></section>
+      <PageHero eyebrow="שירות מנוהל מתחילתו ועד סופו" title={<>ארבעה צעדים.<br /><em>ואז שיחה שסוגרת.</em></>} lead="אין הטמעה ארוכה ואין מערכת חדשה ללמוד. אנחנו מחברים, בודקים ורק אז מעלים את ורו מול לקוחות." />
+      <section className="section section-paper"><div className="shell"><SectionHeading eyebrow="איך זה עובד" title={<>מחיבור ראשון<br /><em>לשיחה שסוגרת.</em></>} lead="אנחנו לא מחברים AI ישר ללקוחות בלי בדיקה. כל חנות עוברת בדיקות לפני עלייה לאוויר." /><Steps items={workflow} /></div></section>
       <section className="section section-mint"><div className="shell"><SectionHeading eyebrow="מה אנחנו מנהלים" title={<>את הטכנולוגיה תשאירו<br /><em>אצלנו.</em></>} /><FeatureGrid items={coreFeatures.slice(0, 4)} /></div></section>
     </SitePage>
   );
 }
 
 const cases = [
-  { industry: "אופנה", metric: "₪ 14,280", title: "Studio North", body: "מכירות שהוחזרו בחודש הראשון בעזרת תשובות מיידיות והצלת סלים.", stat: "+23% המרות" },
-  { industry: "קוסמטיקה", metric: "31", title: "Noya Skin", body: "סלים שניצלו אחרי שוורו ענה על התאמה לעור רגיש בשיחה קצרה.", stat: "18% יותר הזמנות" },
-  { industry: "בית", metric: "2.7x", title: "Forma Home", body: "יותר הזמנות בשעות שבהן צוות השירות כבר לא היה מול המסך.", stat: "24/7 מענה" },
+  { industry: "אופנה", metric: "מידות וצבעים", title: "פיילוט אופנה", body: "נמדוד שאלות על מידות, צבעים, זמינות ומשלוחים, וכמה מהן מתקדמות להזמנה.", stat: "שאלות שחוזרות על עצמן" },
+  { industry: "קוסמטיקה", metric: "התאמה לעור", title: "פיילוט קוסמטיקה", body: "נבדוק התאמה לעור, רכיבים והמלצות — וגם מתי נכון להעביר לנציג מקצועי.", stat: "המלצות בטוחות בלבד" },
+  { industry: "בית", metric: "מלאי ומשלוח", title: "פיילוט בית", body: "נמדוד זמינות מלאי, השוואת מוצרים ומשלוחים, כדי להבין מה עוזר ללקוח לסגור.", stat: "מעבר משאלה לפעולה" },
 ];
 
 function ResultsPage() {
   return (
     <SitePage>
-      <PageHero eyebrow="תוצאות שאפשר למדוד" title={<>פחות שיחות אבודות.<br /><em>יותר כסף בקופה.</em></>} lead="המדד שלנו פשוט: כמה הכנסות ורו החזיר לחנות, וכמה לקוחות קיבלו תשובה ברגע הנכון." />
+      <PageHero eyebrow="תוצאות שאפשר למדוד" title={<>פחות שיחות אבודות.<br /><em>יותר החלטות קנייה.</em></>} lead="בפיילוט מודדים כמה שיחות קיבלו מענה בזמן, כמה לקוחות עברו משאלה להזמנה וכמה פעמים ורו העביר לנציג במקום לנחש." />
       <section className="section section-paper">
         <div className="shell">
-          <SectionHeading eyebrow="לקוחות אמיתיים. מספרים אמיתיים." title={<>ההשפעה מתחילה<br /><em>מהחודש הראשון.</em></>} />
+          <SectionHeading eyebrow="כך נמדוד הצלחה בפיילוט" title={<>לא מבטיחים מספרים מראש.<br /><em>בונים מדידה נקייה.</em></>} lead="בכל חנות נגדיר לפני העלייה לאוויר מה נחשב שיחה מוצלחת ומה צריך לעבור לאדם." />
           <div className="case-grid">
             {cases.map((item) => <article className="case-study reveal" key={item.title}><span>{item.industry}</span><strong>{item.metric}</strong><small>{item.stat}</small><h3>{item.title}</h3><p>{item.body}</p></article>)}
           </div>
         </div>
       </section>
-      <section className="section result-section"><div className="shell featured-result"><div><p className="eyebrow eyebrow-mint">סיפור לקוח</p><h2>כשהמענה נהיה מיידי,<br /><em>ההזמנה מגיעה אחריו.</em></h2></div><blockquote>״פעם היינו מתחילים את הבוקר עם שאלות מאתמול. היום אנחנו מתחילים אותו עם הזמנות.״</blockquote></div></section>
+      <section className="section result-section"><div className="shell featured-result"><div><p className="eyebrow eyebrow-mint">המדדים הראשונים</p><h2>מענה בזמן.<br /><em>העברה חכמה לאדם.</em></h2></div><blockquote>במקום להציג מספרים שלא אומתו, Surevo מתחיל ממדידה: זמן תגובה, שיחות שהתקדמו להזמנה, סלים שחזרו, ומקרים שבהם ורו בחר לא להמציא תשובה.</blockquote></div></section>
     </SitePage>
   );
 }
@@ -174,12 +203,30 @@ function ResultsPage() {
 function AgenciesPage() {
   return (
     <SitePage>
-      <PageHero eyebrow="Surevo for Agencies" title={<>AI מכירות ללקוחות שלכם.<br /><em>בלי לבנות צוות חדש.</em></>} lead="אתם שומרים על הקשר עם הלקוח. אנחנו מטפלים בטכנולוגיה, בהקמה ובשיפור החודשי." />
+      <PageHero eyebrow="Surevo for Agencies" title={<>AI מכירות ללקוחות שלכם.<br /><em>בלי לבנות צוות חדש.</em></>} lead="מתאים לסוכנויות שמנהלות לפחות 5 חנויות WooCommerce פעילות. אתם מביאים את הלקוח והקשר. אנחנו מטפלים בהקמה, חיבורים, אימון וריפורטינג." />
       <section className="section section-paper"><div className="shell"><SectionHeading eyebrow="שותפות שחוזרת כל חודש" title={<>שירות חדש.<br /><em>הכנסה חוזרת.</em></>} /><FeatureGrid items={[
         { icon: "chart", title: "עד 30% עמלה חוזרת", body: "כל לקוח פעיל מוסיף הכנסה חודשית יציבה לסוכנות." },
         { icon: "shield", title: "אנחנו מטפלים בטכנולוגיה", body: "הקמה, חיבורים, אימון ושיפור נשארים אצל צוות Surevo." },
         { icon: "users", title: "אתם שומרים על הקשר", body: "White-label או co-branded, בהתאם לדרך שבה אתם עובדים." },
       ]} /></div></section>
+      <section className="section section-mint">
+        <div className="shell faq-layout">
+          <SectionHeading eyebrow="לפני שמציעים ללקוח" title={<>איך זה עובד<br /><em>בשותפות.</em></>} lead="מודל השותפות נבנה כך שהלקוח מקבל שירות מנוהל ואתם נשארים בעל הקשר העסקי." />
+          <div className="faq-list reveal">
+            {[
+              ["איך עובדת העמלה?", "עמלה חוזרת נקבעת לפי סוג הלקוח, המסלול והיקף המעורבות של הסוכנות."],
+              ["האם אפשר white-label?", "כן. אפשר לעבוד white-label או co-branded, בהתאם לאופן שבו אתם מנהלים לקוחות."],
+              ["מי נותן תמיכה ללקוח?", "Surevo מטפלת בהקמה, חיבורים, אימון וריפורטינג. הסוכנות יכולה להישאר נקודת הקשר המסחרית."],
+              ["האם יש דמו לסוכנות?", "כן. בשיחה הראשונה נציג דמו ונבדוק אילו לקוחות מתאימים לפיילוט."],
+            ].map(([question, answer], index) => (
+              <article className={`faq-item ${index === 0 ? "open" : ""}`} key={question}>
+                <button type="button" aria-expanded={index === 0 ? "true" : "false"}><span>{question}</span><Icon name="chevron" /></button>
+                <div className="faq-answer" aria-hidden={index === 0 ? "false" : "true"}><p>{answer}</p></div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="section audit-section"><div className="shell audit-layout"><div className="audit-copy"><p className="eyebrow">בואו נדבר שותפות</p><h2>כמה לקוחות יכולים<br /><em>להתחיל למכור יותר?</em></h2><p>ספרו לנו על הסוכנות ונחזור עם מודל שמתאים לתיק הלקוחות שלכם.</p></div><AuditForm partner /></div></section>
     </SitePage>
   );
@@ -192,7 +239,7 @@ function AboutPage() {
       <section className="section section-paper">
         <div className="shell story-layout">
           <div><p className="eyebrow">הסיפור שלנו</p><h2>טכנולוגיה טובה<br /><em>מרגישה אנושית.</em></h2></div>
-          <div><p>Surevo נולד מתוך עבודה עם עסקים דיגיטליים בישראל. ראינו חנויות משקיעות בפרסום, במוצרים ובאתר, ואז מאבדות את הלקוח דווקא ברגע שבו הוא שאל שאלה קטנה.</p><p>בנינו את ורו כדי לענות ברגע הזה: בלי להעמיס עוד כלי על העסק ובלי להפוך שיחה אנושית לתפריט כפתורים קר.</p></div>
+          <div><p>Surevo נבנה על ידי Fast Cybers, צוות ישראלי לפיתוח ואוטומציה לעסקים דיגיטליים. ראינו חנויות משקיעות בפרסום, במוצרים ובאתר, ואז מאבדות את הלקוח דווקא ברגע שבו הוא שאל שאלה קטנה.</p><p>בנינו את ורו כדי לענות ברגע הזה: בלי להעמיס עוד כלי על העסק ובלי להפוך שיחה אנושית לתפריט כפתורים קר.</p><p>מאחורי ורו יש צוות אנושי שבודק את ההקמה, את התשובות ואת המדידה, כדי שהשירות ירגיש אחראי ולא אוטומטי מדי.</p></div>
         </div>
       </section>
       <section className="section section-mint"><div className="shell"><FeatureGrid items={[
@@ -207,10 +254,10 @@ function AboutPage() {
 function ContactPage() {
   return (
     <SitePage>
-      <PageHero eyebrow="אנחנו כאן" title={<>בואו נדבר<br /><em>על החנות שלכם.</em></>} lead="השאירו פרטים לאבחון או כתבו לנו ישירות בוואטסאפ. נחזור אליכם בתוך יום עסקים." />
+      <PageHero eyebrow="אנחנו כאן" title={<>בואו נדבר<br /><em>על החנות שלכם.</em></>} lead="השאירו פרטים לאבחון או כתבו לנו ישירות בוואטסאפ. מענה אנושי תוך יום עסקים." />
       <section className="section audit-section">
         <div className="shell audit-layout">
-          <div className="contact-panel"><p className="eyebrow">צור קשר</p><h2>תשובה אנושית.<br /><em>תוך 24 שעות.</em></h2><p>אפשר להתחיל באבחון החינמי או לכתוב לנו. אנחנו עובדים עם חנויות וסוכנויות בכל הארץ.</p><a className="button button-primary button-lg" href="https://wa.me/972500000000"><Icon name="whatsapp" /> דברו איתנו בוואטסאפ</a><div className="contact-detail"><Vero expression="wink" /><span>נבנה בישראל<br /><small>עובדים מרחוק עם עסקים בכל הארץ</small></span></div></div>
+          <div className="contact-panel"><p className="eyebrow">צור קשר</p><h2>תשובה אנושית.<br /><em>תוך יום עסקים.</em></h2><p>אפשר להתחיל באבחון החינמי או לכתוב לנו. Surevo נבנה על ידי Fast Cybers, צוות ישראלי שעובד עם חנויות וסוכנויות בכל הארץ.</p><a className="button button-primary button-lg" href="https://wa.me/972500000000"><Icon name="whatsapp" /> דברו איתנו בוואטסאפ</a><a className="text-link contact-email" href="mailto:hello@surevo.ai">hello@surevo.ai</a><div className="contact-detail"><Vero expression="wink" /><span>נבנה בישראל<br /><small>מענה אנושי תוך יום עסקים</small></span></div></div>
           <AuditForm />
         </div>
       </section>
@@ -220,18 +267,35 @@ function ContactPage() {
 
 const legalSections = {
   privacy: [
-    ["איזה מידע אנחנו אוספים", "אנחנו אוספים רק את הפרטים הדרושים כדי לספק אבחון, לחזור אליכם ולהפעיל את השירות: פרטי קשר, כתובת חנות ומידע תפעולי שתבחרו לחבר."],
-    ["איך אנחנו משתמשים במידע", "המידע משמש להפעלת השירות, לשיפור ביצועים ולתקשורת שקשורה ישירות לבקשה או להסכם שלכם עם Surevo."],
-    ["אבטחה ושמירה", "אנחנו מגבילים גישה למידע ופועלים לצמצום, שמירה ואבטחה בהתאם לדין החל ולצרכים התפעוליים של השירות."],
+    ["איזה מידע אנחנו אוספים", "אנחנו אוספים רק את הפרטים הדרושים כדי לספק אבחון, לחזור אליכם ולהפעיל את השירות: שם, פרטי קשר, כתובת חנות, מידע תפעולי ומידע שתבחרו לחבר או לשתף."],
+    ["איך אנחנו משתמשים במידע", "המידע משמש להפעלת השירות, אבחון ראשוני, יצירת קשר, שיפור ביצועים, תמיכה, אבטחה ותקשורת שקשורה ישירות לבקשה או להסכם שלכם עם Surevo."],
+    ["חיבור למערכות צד שלישי", "ייתכן שנשתמש בספקי תשתית, אוטומציה, אנליטיקה, WhatsApp Business Platform, מערכות CRM, ומערכות סליקה או חשבוניות לפי הצורך."],
+    ["שימוש בוואטסאפ", "כאשר אתם משאירים מספר וואטסאפ ומאשרים יצירת קשר, אנחנו משתמשים במספר רק כדי לחזור אליכם לגבי הבקשה, האבחון או השירות. ניתן לבקש להפסיק לקבל הודעות בכל רגע."],
+    ["שמירת מידע ומחיקה", "נשמור מידע רק כל עוד הוא נדרש למטרה שלשמה נמסר, להפעלת השירות, לעמידה בהתחייבויות או לפי דין. ניתן לפנות אלינו לבקשת מחיקה או תיקון."],
+    ["מי נחשף למידע", "גישה למידע ניתנת רק לצוות Surevo ולספקים הדרושים להפעלת השירות, ובמידה הדרושה למטרה הרלוונטית."],
+    ["אבטחת מידע", "אנחנו מגבילים גישה למידע ופועלים לצמצום, שמירה ואבטחה בהתאם לדין החל ולצרכים התפעוליים של השירות."],
+    ["זכויות המשתמש", "ניתן לפנות אלינו כדי לבקש עיון, תיקון, מחיקה או הפסקת יצירת קשר, בהתאם לדין החל וליכולתנו הטכנית והתפעולית."],
+    ["עדכון אחרון", "עודכן לאחרונה: 26 ביוני 2026."],
   ],
   terms: [
-    ["השירות", "Surevo מספקת שירות סוכן מכירות דיגיטלי מנוהל. היקף ההקמה, החיבורים והליווי נקבע לפי המסלול וההצעה המסחרית."],
-    ["אחריות הלקוח", "הלקוח אחראי לספק מידע מדויק, הרשאות מתאימות ותוכן חוקי לשימוש במערכת ובערוצי התקשורת המחוברים."],
+    ["הגדרת השירות", "Surevo מספקת שירות סוכן מכירות דיגיטלי מנוהל לאתר, וואטסאפ ומערכות מסחר. היקף ההקמה, החיבורים והליווי נקבע לפי המסלול וההצעה המסחרית."],
+    ["שירות מנוהל ולא ייעוץ", "השירות אינו מהווה ייעוץ משפטי, חשבונאי, רפואי או מקצועי אחר. החלטות עסקיות נשארות באחריות הלקוח."],
+    ["אחריות הלקוח לדיוק מידע המוצרים", "הלקוח אחראי לספק מידע מדויק, הרשאות מתאימות, מדיניות עדכנית ותוכן חוקי לשימוש במערכת ובערוצי התקשורת המחוברים."],
+    ["מגבלות AI והעברה לנציג", "Surevo פועלת לפי המידע שמחובר ונמסר על ידי הלקוח. במקרים שבהם אין מידע מספיק או שיש צורך בשיקול דעת אנושי, המערכת עשויה להעביר את השיחה לנציג."],
+    ["תשלומים, הקמה וביטול", "דמי הקמה, תשלום חודשי, חיבורים מיוחדים ותנאי ביטול יפורטו בהצעה המסחרית או בהסכם מול הלקוח."],
+    ["אחריות 30 יום", "כאשר מוצעת אחריות הקמה, תנאיה יחולו רק לפי ההצעה המסחרית. ככלל, נמדוד יחד בחודש הראשון אם השירות מחזיר את דמי השירות החודשיים; אם לא, נפעל לפי תנאי האחריות שסוכמו."],
+    ["שימוש בוואטסאפ וערוצי צד שלישי", "הפעלת השירות כפופה גם לזמינות, למדיניות ולמגבלות של WhatsApp Business Platform וספקי צד שלישי נוספים."],
+    ["זמינות השירות", "אנחנו שואפים לזמינות גבוהה, אך ייתכנו תקלות, עבודות תחזוקה או מגבלות מצד ספקי צד שלישי."],
+    ["קניין רוחני", "האתר, המותג, העיצובים, התוכן והטכנולוגיה של Surevo הם קניינה של Surevo או של מעניקי רישיון מטעמה."],
+    ["הגבלת אחריות", "בכפוף לדין החל, Surevo לא תישא באחריות לנזקים עקיפים, אובדן רווחים או תוצאות עסקיות שלא הובטחו במפורש בהסכם."],
     ["שינויים ועדכונים", "אנחנו עשויים לעדכן את השירות ואת התנאים מעת לעת. שינוי מהותי יפורסם בצורה ברורה ובזמן סביר."],
   ],
   accessibility: [
     ["מחויבות לנגישות", "אנחנו פועלים כדי שהאתר והשירות יהיו נגישים לשימוש רחב ככל האפשר, בהתאם לעקרונות WCAG 2.1 AA."],
     ["מה כבר יישמנו", "האתר כולל ניווט מקלדת, טבעות focus ברורות, היררכיית כותרות, ניגודיות, טקסט חלופי ותמיכה בהפחתת תנועה."],
+    ["רכז נגישות", "רכז נגישות: צוות Surevo. אפשר לפנות אלינו בכתובת hello@surevo.ai או דרך עמוד יצירת הקשר."],
+    ["זמן מענה", "נשתדל לחזור לפניות נגישות בתוך 3 ימי עסקים."],
+    ["עדכון אחרון", "עודכן לאחרונה: 26 ביוני 2026."],
     ["נתקלתם בבעיה?", "אם נתקלתם בחסם נגישות, כתבו לנו דרך עמוד יצירת הקשר. נבדוק, נחזור אליכם ונפעל לתקן."],
   ],
 } as const;
@@ -277,9 +341,8 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  if (!(slug in pages)) return {};
-  const [title, description] = pages[slug as Slug];
-  return { title: `${title} | Surevo`, description };
+  if (!(slug in pages) || !(slug in pageSeo)) return {};
+  return getPageMetadata(slug as SeoPage);
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
