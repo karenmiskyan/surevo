@@ -90,7 +90,9 @@ function Header() {
         </div>
         <nav aria-label="ניווט למובייל">
           {navLinks.map(([href, label], index) => (
-            <a href={withBase(href)} key={href}><span>0{index + 1}</span>{label}</a>
+            <a href={withBase(href)} key={href} aria-label={label}>
+              <span aria-hidden="true">0{index + 1}</span>{label}
+            </a>
           ))}
         </nav>
         <div className="mobile-menu-bottom">
